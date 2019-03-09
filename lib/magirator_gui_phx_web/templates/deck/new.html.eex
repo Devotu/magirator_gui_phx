@@ -1,0 +1,28 @@
+New deck
+
+<%= form_for @conn, deck_path(@conn, :create), [as: :new_deck], fn f -> %>
+  <%= player_select(:new_deck, :player_id) %>
+</br>
+  <%= label(f, :name, "Name") %> </br>
+  <%= text_input(f, :name) %> </br>
+</br>
+  <%= label(f, :theme, "Theme") %> </br>
+  <%= text_input(f, :theme) %> </br>
+</br>
+  <%= label(f, :format, "Format") %> </br>
+  Block <%= radio_button(f, :format, "block") %> </br>
+  Standard <%= radio_button(f, :format, "standard") %> </br>
+  Modern <%= radio_button(f, :format, "modern") %> </br>
+</br>
+  <%= label(f, :black, "Colors") %> </br>
+  Black <%= checkbox(f, :black)%> </br>
+  White <%= checkbox(f, :white)%> </br>
+  Red <%= checkbox(f, :red)%> </br>
+  Green <%= checkbox(f, :green)%> </br>
+  Blue <%= checkbox(f, :blue)%> </br>
+  Colorles <%= checkbox(f, :colorless)%> </br>
+</br>
+  <%= submit("Create") %>
+  <%= button("Main", to: main_path(@conn, :main), method: "get") %>
+
+<% end %>

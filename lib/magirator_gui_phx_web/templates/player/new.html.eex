@@ -1,0 +1,17 @@
+New player
+
+<%= form_for @conn, player_path(@conn, :create), [as: :new_player], fn f -> %>
+</br>
+  <%= label(f, :name, "Name") %> </br>
+  <%= text_input(f, :name) %> </br>
+</br>
+  <%= label(f, :email, "email") %> </br>
+  <%= text_input(f, :email) %> </br>
+</br>
+  <%= label(f, :password, "password") %> </br>
+  <%= text_input(f, :password) %> </br>
+</br>
+  <%= submit("Create") %>
+  <%= button("Main", to: main_path(@conn, :main), method: "get") %>
+
+<% end %>

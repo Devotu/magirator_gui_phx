@@ -1,0 +1,30 @@
+<h1>Add new game</h1>
+
+<%= form_for @conn, game_path(@conn, :create), [as: :game], fn f -> %>
+  
+  <%= player_select(:game, :creator_id) %>
+  <%= deck_select(:game, :creator_deck_id) %>
+
+  <br>
+  vs
+  <br>
+
+  <%= player_select(:game, :opponent_id) %>
+  <%= deck_select(:game, :opponent_deck_id) %>
+
+  <%= label(f, :conclusion, "Format") %> </br>
+  Victory <%= radio_button(f, :conclusion, "victory") %> </br>
+  Draw <%= radio_button(f, :conclusion, "draw") %> </br>
+  Defeat <%= radio_button(f, :conclusion, "defeat") %> </br>
+
+  <br>
+
+  <%= label(f, :comment, "Comment") %> </br>
+  <%= text_input(f, :comment) %> </br>
+
+  <br>
+
+  <%= submit("Create") %><br>
+  <%= button("Main", to: main_path(@conn, :main), method: "get") %><br>
+
+<% end %>
