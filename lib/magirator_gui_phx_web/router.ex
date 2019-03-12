@@ -28,6 +28,8 @@ defmodule MagiratorGuiPhxWeb.Router do
 
     get "/games/new", GameController, :new
     post "/games", GameController, :create
+
+    get "/ratings", RatingController, :index
   end
 
   scope "/", MagiratorGuiPhxWeb do

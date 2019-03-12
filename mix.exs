@@ -44,6 +44,7 @@ defmodule MagiratorGuiPhx.Mixfile do
       {:ecto, "~> 3.0"},
       
       {:magirator_store, [path: "../magirator_store"]},
+      {:magirator_calculator, [path: "../magirator_calculator"]},
     ]
   end
 end

@@ -1,0 +1,12 @@
+<h4>Points</h4>
+
+<ul>
+  <%= for rating <- @ratings do %>
+    <li> 
+      <%= rating.deck_name %>
+      <%= rating.points %>
+    </li>
+  <%= end %>
+</ul>
+
+<%= button("Main", to: main_path(@conn, :main), method: "get") %>
