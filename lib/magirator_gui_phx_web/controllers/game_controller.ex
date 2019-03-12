@@ -23,7 +23,7 @@ defmodule MagiratorGuiPhxWeb.GameController do
         comment: game_params["comment"]
       }
 
-    {:ok, creator_result_id} = MagiratorStore.add_result(creator_result)
+    {:ok, _creator_result_id} = MagiratorStore.add_result(creator_result)
 
     opponent_result = %Result{
         game_id: game_id,
@@ -33,7 +33,7 @@ defmodule MagiratorGuiPhxWeb.GameController do
         comment: game_params["comment"]
       }
 
-    {:ok, opponent_result_id} = MagiratorStore.add_result(opponent_result)
+    {:ok, _opponent_result_id} = MagiratorStore.add_result(opponent_result)
     
     conn
     |> redirect(to: main_path(conn, :main))
