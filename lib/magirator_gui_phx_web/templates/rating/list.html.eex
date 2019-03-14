@@ -1,12 +1,24 @@
 <h4>Points</h4>
 
-<ul>
-  <%= for rating <- @ratings do %>
-    <li> 
-      <%= rating.deck_name %>
-      <%= rating.points %>
-    </li>
-  <%= end %>
-</ul>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Games</th>
+      <th>Winrate</th>
+      <th>P-Diff</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= for rating <- @ratings do %>
+    <tr>
+      <td><%= rating.deck_name %></td>
+      <td><%= rating.games %></td>
+      <td><%= Float.round(rating.winrate * 100) %></td>
+      <td class="<%= red_ink(rating.pdiff) %>"><%= rating.pdiff %></td>
+    </tr>
+    <%= end %>
+  </tbody>
+</table>
 
 <%= button("Main", to: main_path(@conn, :main), method: "get") %>

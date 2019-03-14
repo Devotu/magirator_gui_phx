@@ -1,0 +1,29 @@
+table {
+  border: 2px solid black;
+  margin: 2px;
+  padding: 5px;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 5px;
+  margin: 2px;
+  border-collapse: collapse;
+}
+
+th {
+  border-bottom: 2px solid black;
+}
+
+td {
+  border: 1px solid gray;
+}
+
+
+thead {
+  text-align: start;
+}
+
+.negative {
+  color: red;
+}
