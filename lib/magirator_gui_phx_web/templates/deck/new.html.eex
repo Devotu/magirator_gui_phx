@@ -1,7 +1,7 @@
 New deck
 
 <%= form_for @conn, deck_path(@conn, :create), [as: :new_deck], fn f -> %>
-  <%= player_select(:new_deck, :player_id) %>
+  <%= render( ComponentView, "select_player.html", form: :new_deck, tag: :player_id ) %>
 </br>
   <%= label(f, :name, "Name") %> </br>
   <%= text_input(f, :name) %> </br>

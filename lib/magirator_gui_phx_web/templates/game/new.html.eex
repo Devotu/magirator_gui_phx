@@ -2,15 +2,15 @@
 
 <%= form_for @conn, game_path(@conn, :create), [as: :game], fn f -> %>
   
-  <%= player_select(:game, :creator_id) %>
-  <%= deck_select(:game, :creator_deck_id) %>
+  <%= render( ComponentView, "select_player.html", form: :game, tag: :creator_id ) %>
+  <%= render( ComponentView, "select_deck.html", form: :game, tag: :creator_deck_id ) %>
 
   <br>
   vs
   <br>
 
-  <%= player_select(:game, :opponent_id) %>
-  <%= deck_select(:game, :opponent_deck_id) %>
+  <%= render( ComponentView, "select_player.html", form: :game, tag: :opponent_id ) %>
+  <%= render( ComponentView, "select_deck.html", form: :game, tag: :opponent_deck_id ) %>
 
   <%= label(f, :conclusion, "Format") %> </br>
   Victory <%= radio_button(f, :conclusion, "victory") %> </br>
