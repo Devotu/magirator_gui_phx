@@ -1,0 +1,32 @@
+<h4> Match #<%= @match.id %> </h4>
+Player one: player_one.name
+ - vs - 
+Player two: player_two.name
+
+<%= form_for @conn, game_path(@conn, :create), [as: :match], fn f -> %>
+  <div>
+    <%= render( ComponentView, "select_player.html", form: :match, tag: :player_one_id ) %>
+    <%= render( ComponentView, "select_deck.html", form: :match, tag: :player_one_deck_id ) %>
+
+    <br>
+    vs
+    <br>
+
+    <%= render( ComponentView, "select_player.html", form: :match, tag: :player_two_id ) %>
+    <%= render( ComponentView, "select_deck.html", form: :match, tag: :player_twp_deck_id ) %>
+  </div>
+
+
+  <%= submit("Create") %><br>
+  <%= button("Main", to: main_path(@conn, :main), method: "get") %><br>
+
+<% end %>
+
+<ul>
+  <%= for game <- @games do %>
+    <li> 
+      <%= game.id %>
+    </li>
+  <%= end %>
+</ul>
+

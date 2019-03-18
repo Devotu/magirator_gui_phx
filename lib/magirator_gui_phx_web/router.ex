@@ -29,6 +29,11 @@ defmodule MagiratorGuiPhxWeb.Router do
     get "/games/new", GameController, :new
     post "/games", GameController, :create
 
+    get "/matches/new", MatchController, :new
+    get "/matches/:id", MatchController, :show
+    post "/matches/:match_id/games/", MatchController, :add_game
+    post "/matches", MatchController, :create
+
     get "/ratings", RatingController, :index
   end
 

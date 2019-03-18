@@ -1,0 +1,26 @@
+
+<%= form_for @conn, match_path(@conn, :create), [as: :match], fn f -> %>
+  <div>
+    <%= render( ComponentView, "select_player.html", form: :match, tag: :player_one_id ) %>
+    <%= render( ComponentView, "select_deck.html", form: :match, tag: :player_one_deck_id ) %>
+
+    <br>
+    vs
+    <br>
+
+    <%= render( ComponentView, "select_player.html", form: :match, tag: :player_two_id ) %>
+    <%= render( ComponentView, "select_deck.html", form: :match, tag: :player_two_deck_id ) %>
+  </div>
+
+  <div>
+    <%= label(f, :winner, "Winner") %> </br>
+    Player one <%= radio_button(f, :winner, 1) %> </br>
+    Draw <%= radio_button(f, :winner, 0) %> </br>
+    Player two <%= radio_button(f, :winner, 2) %> </br>
+  </div>
+
+
+  <%= submit("Create") %><br>
+  <%= button("Main", to: main_path(@conn, :main), method: "get") %><br>
+
+<% end %>

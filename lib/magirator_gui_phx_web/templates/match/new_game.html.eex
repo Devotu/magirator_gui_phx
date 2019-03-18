@@ -1,0 +1,12 @@
+<h1>Add new game</h1>
+
+<%= form_for @conn, game_path(@conn, :create), [as: :game], fn f -> %>
+
+  P1 <%= radio_button(f, :conclusion, "player_one") %> </br>
+  Draw <%= radio_button(f, :conclusion, "draw") %> </br>
+  P2 <%= radio_button(f, :conclusion, "player_two") %> </br>
+
+  <br>
+
+  <%= submit("Add") %><br>
+<% end %>

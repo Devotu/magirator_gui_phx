@@ -4,4 +4,5 @@
 <%= button("New Deck", to: deck_path(@conn, :new), method: "get") %><br>
 <%= button("Decks", to: deck_path(@conn, :index), method: "get") %><br>
 <%= button("New Game", to: game_path(@conn, :new), method: "get") %><br>
+<%= button("New Match", to: match_path(@conn, :new), method: "get") %><br>
 <%= button("Ratings", to: rating_path(@conn, :index), method: "get") %><br>

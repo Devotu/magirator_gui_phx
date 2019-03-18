@@ -12,7 +12,7 @@
   <%= render( ComponentView, "select_player.html", form: :game, tag: :opponent_id ) %>
   <%= render( ComponentView, "select_deck.html", form: :game, tag: :opponent_deck_id ) %>
 
-  <%= label(f, :conclusion, "Format") %> </br>
+  <%= label(f, :conclusion, "Conclusion") %> </br>
   Victory <%= radio_button(f, :conclusion, "victory") %> </br>
   Draw <%= radio_button(f, :conclusion, "draw") %> </br>
   Defeat <%= radio_button(f, :conclusion, "defeat") %> </br>
