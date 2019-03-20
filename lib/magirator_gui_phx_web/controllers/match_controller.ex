@@ -48,7 +48,23 @@ defmodule MagiratorGuiPhxWeb.MatchController do
   def show(conn, %{"id" => id}) do
     {:ok, match} = MagiratorStore.get_match id
     {:ok, games} = MagiratorStore.get_games_in_match id
-    render conn, "show.html", %{match: match, games: games}
+
+    [first_game | _] = games
+
+    {:ok, [first_result, second_result]} = MagiratorStore.list_results_by_game first_game.id
+
+    IO.puts(Kernel.inspect(first_result))
+    {:ok, player_one} = MagiratorStore.get_player(first_result.player_id)
+    {:ok, deck_one} = MagiratorStore.get_deck(first_result.deck_id)
+
+    {:ok, player_two} = MagiratorStore.get_player(second_result.player_id)
+    {:ok, deck_two} = MagiratorStore.get_deck(second_result.deck_id)
+
+    render conn, "show.html", %{
+        match: match, games: games, 
+        player_one: player_one, deck_one: deck_one,
+        player_two: player_two, deck_two: deck_two
+      }
   end
 
 
