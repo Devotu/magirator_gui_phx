@@ -13,8 +13,19 @@
 
 <br>
 
-<%= form_for @conn, game_path(@conn, :create), [as: :match], fn f -> %>
+<%= form_for @conn, match_path(@conn, :add_game, @match.id), [as: :game], fn f -> %>
 
+  <%= hidden_input(f, :match_id, [value: @match.id]) %>
+
+  <%= hidden_input(f, :player_one_id, [value: @player_one.id]) %>
+  <%= hidden_input(f, :player_one_deck_id, [value: @deck_one.id]) %>
+  <%= @player_one.name %> <%= radio_button(f, :winner, 1) %> </br>
+  Draw <%= radio_button(f, :winner, 0) %> </br>
+  <%= @player_two.name %> <%= radio_button(f, :winner, 2) %> </br>
+  <%= hidden_input(f, :player_two_id, [value: @player_two.id]) %>
+  <%= hidden_input(f, :player_two_deck_id, [value: @deck_two.id]) %>
+
+  <br>
 
   <%= submit("Add") %><br>
 
