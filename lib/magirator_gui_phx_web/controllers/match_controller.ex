@@ -3,6 +3,7 @@ defmodule MagiratorGuiPhxWeb.MatchController do
   alias MagiratorStore.Structs.Match
   alias MagiratorStore.Structs.Game
   alias MagiratorStore.Structs.Result
+  alias MagiratorStore.Structs.Participant
   alias MagiratorStore.Helpers
 
   def new(conn, _params) do
@@ -14,56 +15,44 @@ defmodule MagiratorGuiPhxWeb.MatchController do
     atom_match = Helpers.atomize_keys match_params
 
     match = %Match{
-        creator_id: atom_match.player_one_id,
-        players: [atom_match.player_one_id, atom_match.player_two_id]
-      }
-
-    {conclusion, conclusion_description} = draw_conclusion atom_match
-    game = %Game{
-        creator_id: atom_match.player_one_id, 
-        conclusion: conclusion_description
-      }
+      creator_id: atom_match.player_one_id
+    }
 
     {:ok, match_id} = MagiratorStore.create_match(match)
-    {:ok, game_id} = MagiratorStore.create_game(game)
-    {:ok} = MagiratorStore.add_game_to_match(game_id, match_id)
 
-    player_one_result = %Result{
-        game_id: game_id,
-        player_id: atom_match.player_one_id,
-        deck_id: atom_match.player_one_deck_id,
-        place: evaluate_place(1, atom_match.winner)
+    participant_one = %Participant{
+        player_id: atom_match.player_one_id, 
+        deck_id: atom_match.player_one_deck_id, 
+        number: 1
       }
 
-    {:ok, _creator_result_id} = MagiratorStore.add_result(player_one_result)
+    {:ok, _participant_id} = MagiratorStore.create_participant(participant_one, match_id)
 
-    player_two_result = %Result{
-        game_id: game_id,
-        player_id: atom_match.player_two_id,
-        deck_id: atom_match.player_two_deck_id,
-        place: evaluate_place(2, atom_match.winner)
+    participant_two = %Participant{
+        player_id: atom_match.player_two_id, 
+        deck_id: atom_match.player_two_deck_id, 
+        number: 2
       }
-    
-    {:ok, _opponent_result_id} = MagiratorStore.add_result(player_two_result)
+
+    {:ok, _participant_id} = MagiratorStore.create_participant(participant_two, match_id)
     
     conn
     |> redirect(to: match_path(conn, :show, match_id))
   end
 
 
-  def show(conn, %{"id" => id}) do
-    {:ok, match} = MagiratorStore.get_match id
-    {:ok, games} = MagiratorStore.get_games_in_match id
+  def show(conn, %{"id" => match_id}) do
+    {:ok, match} = MagiratorStore.get_match( match_id )
 
-    [first_game | _] = games
+    {:ok, [participant_one, participant_two]} = MagiratorStore.list_participants_by_match( match_id )
 
-    {:ok, [player_one_result, player_two_result]} = MagiratorStore.list_results_by_game first_game.id
+    {:ok, player_one} = MagiratorStore.get_player( participant_one.player_id )
+    {:ok, deck_one} = MagiratorStore.get_deck( participant_one.deck_id )
 
-    {:ok, player_one} = MagiratorStore.get_player(player_one_result.player_id)
-    {:ok, deck_one} = MagiratorStore.get_deck(player_one_result.deck_id)
+    {:ok, player_two} = MagiratorStore.get_player( participant_two.player_id )
+    {:ok, deck_two} = MagiratorStore.get_deck( participant_two.deck_id )
 
-    {:ok, player_two} = MagiratorStore.get_player(player_two_result.player_id)
-    {:ok, deck_two} = MagiratorStore.get_deck(player_two_result.deck_id)
+    {:ok, games} = MagiratorStore.get_games_in_match( match_id )
 
     render conn, "show.html", %{
         match: match, games: games, 
@@ -80,8 +69,13 @@ defmodule MagiratorGuiPhxWeb.MatchController do
       atom_game.match_id
       |> Integer.parse
 
+    {winner_number, _} = 
+      atom_game.winner
+      |> Integer.parse
 
-    {conclusion, conclusion_description} = draw_conclusion atom_game
+    IO.puts( Kernel.inspect( winner_number ) )
+
+    {conclusion, conclusion_description} = draw_conclusion( winner_number )
 
     game = %Game{creator_id: atom_game.player_one_id, conclusion: conclusion_description}
 
@@ -92,7 +86,7 @@ defmodule MagiratorGuiPhxWeb.MatchController do
         game_id: game_id,
         player_id: atom_game.player_one_id,
         deck_id: atom_game.player_one_deck_id,
-        place: evaluate_place(1, atom_game.winner)
+        place: evaluate_place(1, winner_number)
       }
 
     {:ok, _creator_result_id} = MagiratorStore.add_result(player_one_result)
@@ -101,29 +95,41 @@ defmodule MagiratorGuiPhxWeb.MatchController do
         game_id: game_id,
         player_id: atom_game.player_two_id,
         deck_id: atom_game.player_two_deck_id,
-        place: evaluate_place(2, atom_game.winner)
+        place: evaluate_place(2, winner_number)
       }
     
     {:ok, _opponent_result_id} = MagiratorStore.add_result(player_two_result)
+
+    IO.puts( "These are the places:" )
+    IO.puts( Kernel.inspect( evaluate_place(1, winner_number) ) )
+    IO.puts( Kernel.inspect( evaluate_place(2, winner_number) ) )
     
     conn
     |> redirect(to: match_path(conn, :show, match_id))
   end
 
 
-  defp evaluate_place(player, winner) do
-    case winner do
-      player ->
+  defp evaluate_place(participant, 0) do
+    IO.puts("Draw")
+    0
+  end
+
+  defp evaluate_place(participant, winner) do
+
+    IO.puts( Kernel.inspect( participant ) )
+    IO.puts( Kernel.inspect( winner ) )
+    IO.puts( Kernel.inspect( winner == participant ) )
+
+    case winner == participant do
+      :true ->
         1
-      0 -> 
-        0
       _ -> 2
     end
   end
 
 
-  defp draw_conclusion(atom_game) do
-    if atom_game.winner > 0 do
+  defp draw_conclusion(winner) do
+    if winner > 0 do
       {:victory, "VICTORY"}
     else
       {:draw, "DRAW"}

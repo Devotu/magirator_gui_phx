@@ -12,14 +12,6 @@
     <%= render( ComponentView, "select_deck.html", form: :match, tag: :player_two_deck_id ) %>
   </div>
 
-  <div>
-    <%= label(f, :winner, "Winner") %> </br>
-    Player one <%= radio_button(f, :winner, 1) %> </br>
-    Draw <%= radio_button(f, :winner, 0) %> </br>
-    Player two <%= radio_button(f, :winner, 2) %> </br>
-  </div>
-
-
   <%= submit("Create") %><br>
   <%= button("Main", to: main_path(@conn, :main), method: "get") %><br>
 
