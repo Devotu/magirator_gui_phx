@@ -4,7 +4,7 @@ defmodule MagiratorGuiPhxWeb.MatchController do
   alias MagiratorStore.Structs.Game
   alias MagiratorStore.Structs.Result
   alias MagiratorStore.Structs.Participant
-  alias MagiratorStore.Helpers
+  alias MagiratorGuiPhxWeb.Helpers
 
   def new(conn, _params) do
     render conn, "new.html"
@@ -54,8 +54,12 @@ defmodule MagiratorGuiPhxWeb.MatchController do
 
     {:ok, games} = MagiratorStore.get_games_in_match( match_id )
 
+    game_results = Enum.map( games, fn(game) -> 
+      %{ game: game, results: Helpers.expect_ok( MagiratorStore.list_results_by_game( game.id ) ) } 
+    end)
+
     render conn, "show.html", %{
-        match: match, games: games, 
+        match: match, game_results: game_results, 
         player_one: player_one, deck_one: deck_one,
         player_two: player_two, deck_two: deck_two
       }
@@ -72,8 +76,6 @@ defmodule MagiratorGuiPhxWeb.MatchController do
     {winner_number, _} = 
       atom_game.winner
       |> Integer.parse
-
-    IO.puts( Kernel.inspect( winner_number ) )
 
     {conclusion, conclusion_description} = draw_conclusion( winner_number )
 
@@ -99,10 +101,6 @@ defmodule MagiratorGuiPhxWeb.MatchController do
       }
     
     {:ok, _opponent_result_id} = MagiratorStore.add_result(player_two_result)
-
-    IO.puts( "These are the places:" )
-    IO.puts( Kernel.inspect( evaluate_place(1, winner_number) ) )
-    IO.puts( Kernel.inspect( evaluate_place(2, winner_number) ) )
     
     conn
     |> redirect(to: match_path(conn, :show, match_id))
@@ -110,16 +108,10 @@ defmodule MagiratorGuiPhxWeb.MatchController do
 
 
   defp evaluate_place(participant, 0) do
-    IO.puts("Draw")
     0
   end
 
   defp evaluate_place(participant, winner) do
-
-    IO.puts( Kernel.inspect( participant ) )
-    IO.puts( Kernel.inspect( winner ) )
-    IO.puts( Kernel.inspect( winner == participant ) )
-
     case winner == participant do
       :true ->
         1

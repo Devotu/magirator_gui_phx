@@ -32,9 +32,13 @@
 <% end %>
 
 <ul>
-  <%= for game <- @games do %>
+  <%= for game_result <- @game_results do %>
     <li> 
-      <%= game.id %>
+      <%= @player_one.name %>
+      <%= Enum.find( game_result.results, fn(r) -> r.player_id == @player_one.id end).place %>
+
+      <%= @player_two.name %>
+      <%= Enum.find( game_result.results, fn(r) -> r.player_id == @player_two.id end).place %>
     </li>
   <%= end %>
 </ul>
