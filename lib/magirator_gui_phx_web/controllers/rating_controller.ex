@@ -2,7 +2,6 @@ defmodule MagiratorGuiPhxWeb.RatingController do
   use MagiratorGuiPhxWeb, :controller
 
   def index(conn, _params) do
-
     {:ok, decks} = MagiratorStore.list_decks()
 
     ratings = 

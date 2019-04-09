@@ -6,7 +6,7 @@
       <th>Name</th>
       <th>Games</th>
       <th>Winrate</th>
-      <th>P-Diff</th>
+      <th>P-Diff (no cap)</th>
     </tr>
   </thead>
   <tbody>
@@ -14,7 +14,7 @@
     <tr>
       <td><%= rating.deck_name %></td>
       <td><%= rating.games %></td>
-      <td><%= Float.round(rating.winrate * 100) %></td>
+      <td><%= Float.round(rating.winrate * 100, 1) %></td>
       <td class="<%= red_ink(rating.pdiff) %>"><%= rating.pdiff %></td>
     </tr>
     <%= end %>

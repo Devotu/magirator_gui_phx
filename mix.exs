@@ -45,6 +45,7 @@ defmodule MagiratorGuiPhx.Mixfile do
       
       {:magirator_store, [path: "../magirator_store"]},
       {:magirator_calculator, [path: "../magirator_calculator"]},
+      {:magirator_query, [path: "../magirator_query"]},
     ]
   end
 end

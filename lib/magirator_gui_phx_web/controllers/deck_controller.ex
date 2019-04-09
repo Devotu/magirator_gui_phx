@@ -25,6 +25,8 @@ defmodule MagiratorGuiPhxWeb.DeckController do
 
   def show(conn, %{"id" => id}) do
     {:ok, deck} = MagiratorStore.get_deck id
-    render conn, "show.html", deck: deck
+    {:ok, results} = MagiratorQuery.find_deck_results(id)
+    winrate = MagiratorCalculator.calculate_winrate(results)
+    render conn, "show.html", %{deck: deck, winrate: winrate}
   end
 end
