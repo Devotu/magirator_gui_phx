@@ -1,1 +1,16 @@
-<h1><%= @winrate %></h1>
+<h3>Ratings</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>P-Diff (no cap)</th>
+      <th>P-Diff (cap 3)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= 0 %></td>
+      <td><%= 0 %></td>
+    </tr>
+  </tbody>
+</table>

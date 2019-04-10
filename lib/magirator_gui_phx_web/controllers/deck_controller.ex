@@ -25,8 +25,11 @@ defmodule MagiratorGuiPhxWeb.DeckController do
 
   def show(conn, %{"id" => id}) do
     {:ok, deck} = MagiratorStore.get_deck id
+    {:ok, game_results} = MagiratorStore.list_results_by_deck(id)
     {:ok, results} = MagiratorQuery.find_deck_results(id)
     winrate = MagiratorCalculator.calculate_winrate(results)
-    render conn, "show.html", %{deck: deck, winrate: winrate}
+    statistical_data = %{games: Enum.count(game_results), winrate: winrate}
+
+    render conn, "show.html", %{deck: deck, statistical_data: statistical_data}
   end
 end

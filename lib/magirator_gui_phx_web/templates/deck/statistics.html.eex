@@ -1,0 +1,16 @@
+<h3>Statistics</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Games</th>
+      <th>Winrate</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= @statistical_data.games %></td>
+      <td><%= @statistical_data.winrate %></td>
+    </tr>
+  </tbody>
+</table>
