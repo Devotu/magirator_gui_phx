@@ -9,8 +9,8 @@
   </thead>
   <tbody>
     <tr>
-      <td><%= 0 %></td>
-      <td><%= 0 %></td>
+      <td><%= @rating_data.pdiff %></td>
+      <td><%= @rating_data.pdiff3 %></td>
     </tr>
   </tbody>
 </table>

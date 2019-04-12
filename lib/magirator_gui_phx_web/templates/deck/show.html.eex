@@ -1,4 +1,4 @@
 <h1><%= @deck.name %></h1>
 
 <%= render(MagiratorGuiPhxWeb.DeckView, "statistics.html", statistical_data: @statistical_data) %>
-<%= render(MagiratorGuiPhxWeb.DeckView, "rating.html", []) %>
+<%= render(MagiratorGuiPhxWeb.DeckView, "rating.html", rating_data: @rating_data) %>
