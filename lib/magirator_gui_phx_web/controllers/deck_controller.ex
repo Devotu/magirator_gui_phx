@@ -37,11 +37,13 @@ defmodule MagiratorGuiPhxWeb.DeckController do
 
     pdiff = MagiratorCalculator.calculate_pdiff(results)
     pdiff3 = MagiratorCalculator.calculate_pdiff_cap(results, 3)
+    pdist2positive = MagiratorCalculator.calculate_pdist_positive(results, 2)
     pdist2 = MagiratorCalculator.calculate_pdist(results, 2)
     
     rating_data = %{
       pdiff: pdiff,
       pdiff3: pdiff3,
+      pdist2positive: pdist2positive,
       pdist2: pdist2
     }
 
