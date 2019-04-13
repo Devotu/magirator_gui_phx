@@ -27,16 +27,22 @@ defmodule MagiratorGuiPhxWeb.DeckController do
     {:ok, deck} = MagiratorStore.get_deck id
     {:ok, game_results} = MagiratorStore.list_results_by_deck(id)
     {:ok, results} = MagiratorQuery.find_deck_results(id)
+    
     winrate = MagiratorCalculator.calculate_winrate(results)
-    pdiff = MagiratorCalculator.calculate_pdiff(results)
-    pdiff3 = MagiratorCalculator.calculate_pdiff_cap(results, 3)
+    
     statistical_data = %{
       games: Enum.count(game_results), 
       winrate: winrate
     }
+
+    pdiff = MagiratorCalculator.calculate_pdiff(results)
+    pdiff3 = MagiratorCalculator.calculate_pdiff_cap(results, 3)
+    pdist2 = MagiratorCalculator.calculate_pdist(results, 2)
+    
     rating_data = %{
       pdiff: pdiff,
-      pdiff3: pdiff3
+      pdiff3: pdiff3,
+      pdist2: pdist2
     }
 
     render conn, "show.html", %{
