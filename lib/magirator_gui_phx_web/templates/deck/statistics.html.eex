@@ -4,12 +4,18 @@
   <thead>
     <tr>
       <th>Games</th>
+      <th>Wins</th>
+      <th>Draws</th>
+      <th>Losses</th>
       <th>Winrate</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><%= @statistical_data.games %></td>
+      <td><%= @statistical_data.wins %></td>
+      <td><%= @statistical_data.draws %></td>
+      <td><%= @statistical_data.losses %></td>
       <td><%= @statistical_data.winrate %></td>
     </tr>
   </tbody>

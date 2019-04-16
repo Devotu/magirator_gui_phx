@@ -32,6 +32,9 @@ defmodule MagiratorGuiPhxWeb.DeckController do
     
     statistical_data = %{
       games: Enum.count(game_results), 
+      wins: Enum.count( Enum.filter( game_results, &(&1.place == 1) ) ), 
+      draws: Enum.count( Enum.filter( game_results, &(&1.place == 0) ) ), 
+      losses: Enum.count( Enum.filter( game_results, &(&1.place > 1) ) ), 
       winrate: winrate
     }
 
