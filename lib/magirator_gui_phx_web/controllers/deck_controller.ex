@@ -12,7 +12,7 @@ defmodule MagiratorGuiPhxWeb.DeckController do
     deck = struct(Deck, atom_deck)
     player_id = deck_params["player_id"]
 
-    {:ok, id} = MagiratorStore.create_deck(deck, player_id)
+    {:ok, _id} = MagiratorStore.create_deck(deck, player_id)
 
     conn
     |> redirect(to: main_path(conn, :main))
@@ -27,7 +27,8 @@ defmodule MagiratorGuiPhxWeb.DeckController do
     {:ok, deck} = MagiratorStore.get_deck id
     {:ok, game_results} = MagiratorStore.list_results_by_deck(id)
     {:ok, results} = MagiratorQuery.find_deck_results(id)
-    
+    {:ok, extended_results} = MagiratorQuery.extend_results_visual(game_results)
+
     winrate = MagiratorCalculator.calculate_winrate(results)
     
     statistical_data = %{
@@ -53,7 +54,8 @@ defmodule MagiratorGuiPhxWeb.DeckController do
     render conn, "show.html", %{
       deck: deck, 
       statistical_data: statistical_data,
-      rating_data: rating_data
+      rating_data: rating_data,
+      matches: extended_results
     }
   end
 end
