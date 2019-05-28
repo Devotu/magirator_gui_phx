@@ -25,4 +25,13 @@ defmodule MagiratorGuiPhxWeb.Helpers do
   def expect_ok( _ ) do
     :error
   end
+
+  def caller_as_atom(caller) do
+    case caller do
+      "deck" ->
+        :deck
+      _ -> 
+        :caller_error
+    end
+  end
 end

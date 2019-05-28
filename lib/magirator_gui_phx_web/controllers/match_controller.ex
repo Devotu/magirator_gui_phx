@@ -127,4 +127,15 @@ defmodule MagiratorGuiPhxWeb.MatchController do
       {:draw, "DRAW"}
     end
   end
+
+
+  def delete(conn, %{"id" => match_id, "caller_id" => caller_id, "caller" => caller}) do
+    {:ok} = MagiratorStore.delete_match( match_id )
+
+    case Helpers.caller_as_atom(caller) do
+      :deck ->
+        conn
+        |> redirect(to: deck_path(conn, :show, caller_id))
+    end
+  end
 end
