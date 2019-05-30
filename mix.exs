@@ -40,7 +40,7 @@ defmodule MagiratorGuiPhx.Mixfile do
       {:plug_cowboy, "~> 1.0"},
       {:phoenix_ecto, "~> 4.0"},
 
-      {:bolt_sips, "~> 0.4.12"},
+      {:bolt_sips, "~> 1.5"},
       {:ecto, "~> 3.0"},
       
       {:magirator_store, [path: "../magirator_store"]},
