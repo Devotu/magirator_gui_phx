@@ -19,9 +19,9 @@
 
   <%= hidden_input(f, :player_one_id, [value: @player_one.id]) %>
   <%= hidden_input(f, :player_one_deck_id, [value: @deck_one.id]) %>
-  <%= @player_one.name %> <%= radio_button(f, :winner, 1) %> </br>
+  <%= @player_one.name %> / <%= @deck_one.name %><%= radio_button(f, :winner, 1) %> </br>
   Draw <%= radio_button(f, :winner, 0) %> </br>
-  <%= @player_two.name %> <%= radio_button(f, :winner, 2) %> </br>
+  <%= @player_two.name %> / <%= @deck_two.name %> <%= radio_button(f, :winner, 2) %> </br>
   <%= hidden_input(f, :player_two_id, [value: @player_two.id]) %>
   <%= hidden_input(f, :player_two_deck_id, [value: @deck_two.id]) %>
 
@@ -44,6 +44,7 @@
 </ul>
 
 <br>
+<%= button("New Match", to: match_path(@conn, :new), method: "get") %><br>
 <%= button("Main", to: main_path(@conn, :main), method: "get") %><br>
 
 
