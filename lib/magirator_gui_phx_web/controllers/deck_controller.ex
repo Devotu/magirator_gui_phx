@@ -1,7 +1,7 @@
 defmodule MagiratorGuiPhxWeb.DeckController do
   use MagiratorGuiPhxWeb, :controller
   alias MagiratorStore.Structs.Deck
-  alias MagiratorStore.Helpers
+  alias MagiratorGuiPhx.Logic.Collector
 
   def new(conn, _params) do
     render conn, "new.html"
@@ -27,29 +27,10 @@ defmodule MagiratorGuiPhxWeb.DeckController do
     {:ok, deck} = MagiratorStore.get_deck id
     {:ok, game_results} = MagiratorStore.list_results_by_deck(id)
     {:ok, results} = MagiratorQuery.find_deck_results(id)
-    {:ok, extended_results} = MagiratorQuery.extend_results_visual(game_results)
+    {:ok, extended_results} = MagiratorQuery.extend_results_visual(game_results) 
 
-    winrate = MagiratorCalculator.calculate_winrate(results)
-    
-    statistical_data = %{
-      games: Enum.count(game_results), 
-      wins: Enum.count( Enum.filter( game_results, &(&1.place == 1) ) ), 
-      draws: Enum.count( Enum.filter( game_results, &(&1.place == 0) ) ), 
-      losses: Enum.count( Enum.filter( game_results, &(&1.place > 1) ) ), 
-      winrate: winrate
-    }
-
-    pdiff = MagiratorCalculator.calculate_pdiff(results)
-    pdiff3 = MagiratorCalculator.calculate_pdiff_cap(results, 3)
-    pdist2positive = MagiratorCalculator.calculate_pdist_positive(results, 2)
-    pdist2 = MagiratorCalculator.calculate_pdist(results, 2)
-    
-    rating_data = %{
-      pdiff: pdiff,
-      pdiff3: pdiff3,
-      pdist2positive: pdist2positive,
-      pdist2: pdist2
-    }
+    statistical_data = Collector.collect_game_statistics(results)    
+    rating_data = Collector.collect_rating_data(results)
 
     render conn, "show.html", %{
       deck: deck, 
