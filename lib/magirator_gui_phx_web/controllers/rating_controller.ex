@@ -1,6 +1,6 @@
 defmodule MagiratorGuiPhxWeb.RatingController do
   use MagiratorGuiPhxWeb, :controller
-  alias MagiratorGuiPhx.Logic.Collector
+  alias MagiratorGuiPhx.Helpers.CollectorHelper, as: Collector
 
   def index(conn, _params) do
     {:ok, decks} = MagiratorStore.list_decks()

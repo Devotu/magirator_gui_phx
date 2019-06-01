@@ -1,4 +1,4 @@
-defmodule MagiratorGuiPhx.Logic.Collector do
+defmodule MagiratorGuiPhx.Helpers.CollectorHelper do
 
   def collect_game_statistics(results) do
     %{

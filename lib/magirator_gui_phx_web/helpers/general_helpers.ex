@@ -1,4 +1,4 @@
-defmodule MagiratorGuiPhxWeb.Helpers do
+defmodule MagiratorGuiPhxWeb.Helpers.GeneralHelper do
 
   @doc """
   Convert map string keys to :atom keys

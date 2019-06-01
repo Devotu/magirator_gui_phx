@@ -4,7 +4,7 @@ defmodule MagiratorGuiPhxWeb.MatchController do
   alias MagiratorStore.Structs.Game
   alias MagiratorStore.Structs.Result
   alias MagiratorStore.Structs.Participant
-  alias MagiratorGuiPhxWeb.Helpers
+  alias MagiratorGuiPhxWeb.Helpers.GeneralHelper, as: Helper
 
   def new(conn, _params) do
     render conn, "new.html"
@@ -12,7 +12,7 @@ defmodule MagiratorGuiPhxWeb.MatchController do
 
 
   def create(conn, %{"match" => match_params}) do
-    atom_match = Helpers.atomize_keys match_params
+    atom_match = Helper.atomize_keys match_params
 
     match = %Match{
       creator_id: atom_match.player_one_id
@@ -55,7 +55,7 @@ defmodule MagiratorGuiPhxWeb.MatchController do
     {:ok, games} = MagiratorStore.get_games_in_match( match_id )
 
     game_results = Enum.map( games, fn(game) -> 
-      %{ game: game, results: Helpers.expect_ok( MagiratorStore.list_results_by_game( game.id ) ) } 
+      %{ game: game, results: Helper.expect_ok( MagiratorStore.list_results_by_game( game.id ) ) } 
     end)
 
     render conn, "show.html", %{
@@ -67,7 +67,7 @@ defmodule MagiratorGuiPhxWeb.MatchController do
 
 
   def add_game(conn, %{"game" => game_params}) do
-    atom_game = Helpers.atomize_keys game_params
+    atom_game = Helper.atomize_keys game_params
 
     {match_id, _} = 
       atom_game.match_id
@@ -132,7 +132,7 @@ defmodule MagiratorGuiPhxWeb.MatchController do
   def delete(conn, %{"id" => match_id, "caller_id" => caller_id, "caller" => caller}) do
     {:ok} = MagiratorStore.delete_match( match_id )
 
-    case Helpers.caller_as_atom(caller) do
+    case Helper.caller_as_atom(caller) do
       :deck ->
         conn
         |> redirect(to: deck_path(conn, :show, caller_id))

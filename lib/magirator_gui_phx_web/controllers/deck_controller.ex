@@ -1,14 +1,15 @@
 defmodule MagiratorGuiPhxWeb.DeckController do
   use MagiratorGuiPhxWeb, :controller
   alias MagiratorStore.Structs.Deck
-  alias MagiratorGuiPhx.Logic.Collector
+  alias MagiratorGuiPhx.Helpers.CollectorHelper, as: Collector
+  alias MagiratorGuiPhxWeb.Helpers.GeneralHelper, as: Helper
 
   def new(conn, _params) do
     render conn, "new.html"
   end
 
   def create(conn, %{"new_deck" => deck_params}) do
-    atom_deck = Helpers.atomize_keys deck_params
+    atom_deck = Helper.atomize_keys deck_params
     deck = struct(Deck, atom_deck)
     player_id = deck_params["player_id"]
 
