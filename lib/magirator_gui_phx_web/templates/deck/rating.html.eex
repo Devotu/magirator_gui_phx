@@ -11,10 +11,10 @@
   </thead>
   <tbody>
     <tr>
-      <td><%= @rating_data.pdiff %></td>
-      <td><%= @rating_data.pdiff3 %></td>
-      <td><%= @rating_data.pdist2positive %></td>
-      <td><%= @rating_data.pdist2 %></td>
+      <td class="<%= DisplayHelper.red_ink(@rating_data.pdiff) %>"><%= @rating_data.pdiff %></td>
+      <td class="<%= DisplayHelper.red_ink(@rating_data.pdiff) %>"><%= @rating_data.pdiff3 %></td>
+      <td class="<%= DisplayHelper.red_ink(@rating_data.pdiff) %>"><%= @rating_data.pdist2positive %></td>
+      <td class="<%= DisplayHelper.red_ink(@rating_data.pdiff) %>"><%= @rating_data.pdist2 %></td>
     </tr>
   </tbody>
 </table>

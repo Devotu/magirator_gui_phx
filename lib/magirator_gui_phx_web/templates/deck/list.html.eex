@@ -6,7 +6,7 @@
       <%= deck.name %>
       <%= link "Show", to: deck_path(@conn, :show, deck.id) %>
     </li>
-  <%= end %>
+  <% end %>
 </ul>
 
 <%= button("Main", to: main_path(@conn, :main), method: "get") %>

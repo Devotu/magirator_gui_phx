@@ -26,12 +26,12 @@
                 <%= game.place %>
               </td>
             </tr>
-            <%= end %>
+            <% end %>
           </tbody>
         </table>
         <%= if(match.info.match_id != 0) do button("Delete", to: match_path(@conn, :delete, match.info.match_id, @deck.id, :deck), method: "delete") end %>
       </td>
     </tr>
-    <%= end %>
+    <% end %>
   </tbody>
 </table>

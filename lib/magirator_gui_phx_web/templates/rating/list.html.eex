@@ -5,17 +5,27 @@
     <tr>
       <th>Name</th>
       <th>Games</th>
+      <th>Wins</th>
+      <th>Losses</th>
       <th>Winrate</th>
       <th>P-Diff (no cap)</th>
+      <th>P-Diff (cap 3)</th>
+      <th>P-Dist+ (2)</th>
+      <th>P-Dist (2)</th>
     </tr>
   </thead>
   <tbody>
     <%= for rating <- @ratings do %>
     <tr>
       <td><%= rating.deck_name %></td>
-      <td><%= rating.games %></td>
-      <td><%= Float.round(rating.winrate * 100, 1) %></td>
-      <td class="<%= red_ink(rating.pdiff) %>"><%= rating.pdiff %></td>
+      <td><%= rating.statistical_data.games %></td>
+      <td><%= rating.statistical_data.wins %></td>
+      <td><%= rating.statistical_data.losses %></td>
+      <td><%= rating.statistical_data.winrate %></td>
+      <td class="<%= DisplayHelper.red_ink(rating.rating_data.pdiff) %>"><%= rating.rating_data.pdiff %></td>
+      <td class="<%= DisplayHelper.red_ink(rating.rating_data.pdiff3) %>"><%= rating.rating_data.pdiff3 %></td>
+      <td class="<%= DisplayHelper.red_ink(rating.rating_data.pdist2positive) %>"><%= rating.rating_data.pdist2positive %></td>
+      <td class="<%= DisplayHelper.red_ink(rating.rating_data.pdist2) %>"><%= rating.rating_data.pdist2 %></td>
     </tr>
     <%= end %>
   </tbody>
