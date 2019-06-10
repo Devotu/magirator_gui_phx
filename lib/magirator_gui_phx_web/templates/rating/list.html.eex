@@ -1,6 +1,6 @@
 <h4>Points</h4>
 
-<table id='statTable'>
+<table id='ratingTable' data-sort-target='ratingTable'>
   <thead>
     <tr>
       <th class='sortButton' data-sort-column='0'>Name</th>
