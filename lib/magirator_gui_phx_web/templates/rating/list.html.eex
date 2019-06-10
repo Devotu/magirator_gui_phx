@@ -1,18 +1,17 @@
 <h4>Points</h4>
 
-<table>
 <table id='statTable'>
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Games</th>
-      <th>Wins</th>
-      <th>Losses</th>
-      <th>Winrate</th>
-      <th>P-Diff (no cap)</th>
-      <th>P-Diff (cap 3)</th>
-      <th>P-Dist+ (2)</th>
-      <th>P-Dist (2)</th>
+      <th class='sortButton' data-sort-column='0'>Name</th>
+      <th class='sortButton' data-sort-column='1'>Games</th>
+      <th class='sortButton' data-sort-column='2'>Wins</th>
+      <th class='sortButton' data-sort-column='3'>Losses</th>
+      <th class='sortButton' data-sort-column='4'>Winrate</th>
+      <th class='sortButton' data-sort-column='5'>P-Diff (no cap)</th>
+      <th class='sortButton' data-sort-column='6'>P-Diff (cap 3)</th>
+      <th class='sortButton' data-sort-column='7'>P-Dist+ (2)</th>
+      <th class='sortButton' data-sort-column='8'>P-Dist (2)</th>
     </tr>
   </thead>
   <tbody>
@@ -28,7 +27,7 @@
       <td class="<%= DisplayHelper.red_ink(rating.rating_data.pdist2positive) %>"><%= rating.rating_data.pdist2positive %></td>
       <td class="<%= DisplayHelper.red_ink(rating.rating_data.pdist2) %>"><%= rating.rating_data.pdist2 %></td>
     </tr>
-    <%= end %>
+    <% end %>
   </tbody>
 </table>
 

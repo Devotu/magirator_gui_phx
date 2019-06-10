@@ -7,7 +7,6 @@ var sortFunctions = (function ()
     let sorting = true;
     
     while (sorting) {
-      console.log("sorting");
       sorting = false;
       let rows = table.rows;
       /* Loop through all table rows (except the
@@ -18,7 +17,6 @@ var sortFunctions = (function ()
 
       let i = 0;
       for (i = 1; i < (rows.length - 1); i++) {
-        console.log(rows[i].cells[column])
         // /* Get the two elements you want to compare,
         // one from current row and one from the next: */
         let x = rows[i].cells[column];
@@ -50,8 +48,6 @@ var sortFunctions = (function ()
         sorting = true;
       }
     }
-
-    console.log("done sorting");
   }
 
   function isNumeric(n) {
