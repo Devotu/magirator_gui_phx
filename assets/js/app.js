@@ -5,7 +5,7 @@ import { sortFunctions } from "./sort.js"
 Array.from(document.getElementsByClassName("sortButton")).forEach(e => 
   e.addEventListener('click', () => 
     {
-      sortFunctions.sortTableByColumn(findSortParent(e), e.dataset.sortColumn); 
+      sortFunctions.sortTableByColumn(findSortParent(e), e.dataset.sortColumn, findOrderAndInvert(e)); 
     }, false)
   );
 
@@ -23,4 +23,15 @@ function findSortParent(element) {
   }
 
   return element.parentElement.dataset.sortTarget;
+}
+
+function findOrderAndInvert(element) {
+  let current = element.dataset.sortDesc;
+  element.dataset.sortDesc = invertBooleanNumber(element.dataset.sortDesc); 
+  return current == 1;
+}
+
+//Converts 1 => 0 & 0 => 1
+function invertBooleanNumber(number) {
+  return Math.pow((number - 1), 2)
 }

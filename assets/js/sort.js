@@ -1,9 +1,10 @@
 var sortFunctions = (function () 
 {
-  function sortTableByColumn(target, column) { 
+  function sortTableByColumn(target, column, desc) { 
 
     let table = document.getElementById(target);
     let sorting = true;
+
 
     if (table != null && typeof table !== "undefined") 
     {
@@ -22,6 +23,13 @@ var sortFunctions = (function ()
           // one from current row and one from the next: */
           let x = rows[i].cells[column];
           let y = rows[i + 1].cells[column];
+
+          //If desc switch evaluation
+          if (desc) {
+            let temp = x;
+            x = y;
+            y = temp;
+          }
   
           // // Check if the two rows should switch place:
           if (isNumeric(x.innerHTML)) 
@@ -61,8 +69,8 @@ var sortFunctions = (function ()
   }
 
   return {
-    sortTableByColumn: function (target, column) {
-      sortTableByColumn(target, column)
+    sortTableByColumn: function (target, column, desc) {
+      sortTableByColumn(target, column, desc)
     }
   }
 })()

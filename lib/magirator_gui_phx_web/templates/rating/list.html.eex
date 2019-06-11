@@ -3,15 +3,15 @@
 <table id='ratingTable' data-sort-target='ratingTable'>
   <thead>
     <tr>
-      <th class='sortButton' data-sort-column='0'>Name</th>
-      <th class='sortButton' data-sort-column='1'>Games</th>
-      <th class='sortButton' data-sort-column='2'>Wins</th>
-      <th class='sortButton' data-sort-column='3'>Losses</th>
-      <th class='sortButton' data-sort-column='4'>Winrate</th>
-      <th class='sortButton' data-sort-column='5'>P-Diff (no cap)</th>
-      <th class='sortButton' data-sort-column='6'>P-Diff (cap 3)</th>
-      <th class='sortButton' data-sort-column='7'>P-Dist+ (2)</th>
-      <th class='sortButton' data-sort-column='8'>P-Dist (2)</th>
+      <th class='sortButton' data-sort-column='0' data-sort-desc='0'>Name</th>
+      <th class='sortButton' data-sort-column='1' data-sort-desc='0'>Games</th>
+      <th class='sortButton' data-sort-column='2' data-sort-desc='0'>Wins</th>
+      <th class='sortButton' data-sort-column='3' data-sort-desc='0'>Losses</th>
+      <th class='sortButton' data-sort-column='4' data-sort-desc='0'>Winrate</th>
+      <th class='sortButton' data-sort-column='5' data-sort-desc='0'>P-Diff (no cap)</th>
+      <th class='sortButton' data-sort-column='6' data-sort-desc='0'>P-Diff (cap 3)</th>
+      <th class='sortButton' data-sort-column='7' data-sort-desc='0'>P-Dist+ (2)</th>
+      <th class='sortButton' data-sort-column='8' data-sort-desc='0'>P-Dist (2)</th>
     </tr>
   </thead>
   <tbody>
