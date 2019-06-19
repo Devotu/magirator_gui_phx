@@ -12,9 +12,10 @@
   </head>
 
   <body>
-    <div class="container">
-        <%= render @view_module, @view_template, assigns %>
-    </div> <!-- /container -->
+    <div class='header'>
+      <h1 class='main-title'>Magirator</h1>
+    </div>
+    <%= render @view_module, @view_template, assigns %>
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>

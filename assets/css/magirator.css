@@ -1,3 +1,64 @@
+/*Container*/
+body {
+  display: grid;
+  grid-template-areas: 
+    'header header header header header header'
+    'content content content content content menu';
+  background-color: lightblue;
+}
+
+.header {
+  grid-area: header;
+  background-color: lightcoral;
+}
+
+.content {
+  grid-area: content;
+  background-color: lightcyan;
+}
+
+.menu {
+  grid-area: menu;
+  background-color: lightgoldenrodyellow;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 100px);
+  grid-gap: 10px;  
+  justify-content: center;
+  padding-top: 25px;
+  align-content: flex-start;
+}
+
+/* Content */
+.list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 100px);
+  grid-gap: 10px;  
+  justify-content: center;
+  padding-top: 25px;
+}
+
+.list-item {
+}
+
+/* Buttons */
+.button {
+  width: 100px;
+  background-color: white;
+  border: solid 2px black;
+  height: 50px;
+}
+
+.back-button {
+  background-color: lightgray;
+}
+
+.button-plaque {
+  background-color: lightgreen;
+}
+
+
+
+/* Table */
 table {
   border: 2px solid black;
   margin: 2px;
@@ -24,6 +85,26 @@ thead {
   text-align: start;
 }
 
+
+/* Styles */
+/* Text */
+* {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 16px;
+}
+
+.main-title {
+  margin: 0;
+  text-align: center;
+  font-size: 2em;
+}
+
+.page-title {
+  text-align: center;
+  height: 50px;
+}
+
+/* Color */
 .negative {
   color: red;
 }

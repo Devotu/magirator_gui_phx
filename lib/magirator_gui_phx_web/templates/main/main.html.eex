@@ -1,8 +1,7 @@
-<h1>Magirator</h1>
 
-<%= button("New Player", to: player_path(@conn, :new), method: "get") %><br>
-<%= button("New Deck", to: deck_path(@conn, :new), method: "get") %><br>
-<%= button("Decks", to: deck_path(@conn, :index), method: "get") %><br>
-<%= button("New Game", to: game_path(@conn, :new), method: "get") %><br>
-<%= button("New Match", to: match_path(@conn, :new), method: "get") %><br>
-<%= button("Ratings", to: rating_path(@conn, :index), method: "get") %><br>
+<div class='content'></div>
+
+<div class='menu'>
+  <div class='page-title'></div>
+  <%= render(MagiratorGuiPhxWeb.MainView, "options.html", %{conn: @conn}) %>
+</div>

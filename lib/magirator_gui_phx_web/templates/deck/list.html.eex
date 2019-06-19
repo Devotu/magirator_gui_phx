@@ -1,13 +1,13 @@
-<h4>Decks</h4>
+<div class='content'>
+  <div class='list'>
+    <%= for deck <- @decks do %>
+      <%= button(deck.name, to: deck_path(@conn, :show, deck.id), method: "get", class: "button list-item") %>
+    <% end %>
+  </div>
+</div>
 
-<ul>
-  <%= for deck <- @decks do %>
-    <li> 
-      <%= deck.name %>
-      <%= link "Show", to: deck_path(@conn, :show, deck.id) %>
-    </li>
-  <% end %>
-</ul>
-
-<%= button("Main", to: main_path(@conn, :main), method: "get") %>
-
+<div class='menu'>
+  <h4 class='page-title button-plaque'>Decks</h4>
+  <%= button("Main", to: main_path(@conn, :main), method: "get", class: "button back-button") %>
+  <%= render(MagiratorGuiPhxWeb.MainView, "options.html", %{conn: @conn}) %>
+</div>

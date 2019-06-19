@@ -1,5 +1,8 @@
 <h1><%= @deck.name %></h1>
-<%= button("Main", to: main_path(@conn, :main), method: "get") %>
+<div class='button-menu'>
+  <%= button("Main", to: main_path(@conn, :main), method: "get", class: "menu-button") %>
+  <%= button("Decks", to: deck_path(@conn, :index), method: "get", class: "menu-button") %>
+</div>
 
 <%= render(MagiratorGuiPhxWeb.DeckView, "statistics.html", statistical_data: @statistical_data) %>
 <%= render(MagiratorGuiPhxWeb.DeckView, "rating.html", rating_data: @rating_data) %>
