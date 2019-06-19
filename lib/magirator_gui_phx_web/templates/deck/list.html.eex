@@ -7,7 +7,9 @@
 </div>
 
 <div class='menu'>
-  <h4 class='page-title button-plaque'>Decks</h4>
+  <div class='button-plaque'>
+    <h4 class='page-title'>Decks</h4>
+  </div>
   <%= button("Main", to: main_path(@conn, :main), method: "get", class: "button back-button") %>
   <%= render(MagiratorGuiPhxWeb.MainView, "options.html", %{conn: @conn}) %>
 </div>

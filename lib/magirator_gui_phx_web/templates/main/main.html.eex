@@ -2,6 +2,8 @@
 <div class='content'></div>
 
 <div class='menu'>
-  <div class='page-title'></div>
+  <div class='button-plaque'>
+    <h4 class='page-title'>Main</h4>
+  </div>
   <%= render(MagiratorGuiPhxWeb.MainView, "options.html", %{conn: @conn}) %>
 </div>

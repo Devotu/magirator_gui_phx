@@ -1,25 +1,26 @@
 /*Container*/
 body {
+  /* background-color: lightblue; */
   display: grid;
   grid-template-areas: 
     'header header header header header header'
     'content content content content content menu';
-  background-color: lightblue;
 }
 
 .header {
   grid-area: header;
-  background-color: lightcoral;
+  margin-top: 4vh;
+  /* background-color: lightcoral; */
 }
 
 .content {
   grid-area: content;
-  background-color: lightcyan;
+  /* background-color: lightcyan; */
 }
 
 .menu {
   grid-area: menu;
-  background-color: lightgoldenrodyellow;
+  /* background-color: lightgoldenrodyellow; */
   display: grid;
   grid-template-columns: repeat(auto-fill, 100px);
   grid-gap: 10px;  
@@ -40,6 +41,11 @@ body {
 .list-item {
 }
 
+.page-title {
+  height: 50%;
+  margin: auto;
+}
+
 /* Buttons */
 .button {
   width: 100px;
@@ -49,11 +55,16 @@ body {
 }
 
 .back-button {
-  background-color: lightgray;
+  /* background-color: lightgray; */
 }
 
 .button-plaque {
-  background-color: lightgreen;
+  /* background-color: lightgreen; */
+  width: 100px;
+  height: 50px;
+  display: flex;
+  background-color: orange;
+  box-sizing: border-box;
 }
 
 
@@ -101,7 +112,7 @@ thead {
 
 .page-title {
   text-align: center;
-  height: 50px;
+  font-size: 1.5em;
 }
 
 /* Color */
