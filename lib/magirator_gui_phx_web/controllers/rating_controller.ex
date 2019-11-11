@@ -3,6 +3,7 @@ defmodule MagiratorGuiPhxWeb.RatingController do
   alias MagiratorGuiPhx.Helpers.CollectorHelper, as: Collector
 
   def index(conn, _params) do
+    {:ok, startStamp} = DateTime.now("Etc/UTC")
     {:ok, decks} = MagiratorStore.list_decks()
 
     ratings = 
@@ -14,6 +15,10 @@ defmodule MagiratorGuiPhxWeb.RatingController do
         statistical_data: Collector.collect_game_statistics(results),
         rating_data: Collector.collect_rating_data(results),
         } end)
+
+    {:ok, endStamp} = DateTime.now("Etc/UTC")
+    time_taken = DateTime.diff(startStamp, endStamp)
+    IO.puts("Time to calculate statistics: #{time_taken}")
 
     render conn, "list.html", ratings: ratings
   end
