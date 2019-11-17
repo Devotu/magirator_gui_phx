@@ -25,7 +25,8 @@ import_config "#{Mix.env}.exs"
 # Configures Neo4j driver
 config :bolt_sips, Bolt,
   hostname: 'localhost',
-  basic_auth: [username: "neo4j", password: "neo4j400"],
+  # basic_auth: [username: "neo4j", password: "neo4j400"],
+  basic_auth: [username: "neo4j", password: "neoTest"],
   # basic_auth: [username: "neo4j", password: "neo_live"],
   port: 7401,
   pool_size: 5,
