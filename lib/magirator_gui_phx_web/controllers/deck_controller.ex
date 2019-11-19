@@ -2,6 +2,7 @@ defmodule MagiratorGuiPhxWeb.DeckController do
   use MagiratorGuiPhxWeb, :controller
   alias MagiratorStore.Structs.Deck
   alias MagiratorGuiPhx.Helpers.CollectorHelper, as: Collector
+  alias MagiratorGuiPhx.Helpers.StatisticsHelper, as: Statistics
   alias MagiratorGuiPhxWeb.Helpers.GeneralHelper, as: Helper
 
   def new(conn, _params) do
@@ -32,7 +33,7 @@ defmodule MagiratorGuiPhxWeb.DeckController do
     {:ok, results} = MagiratorQuery.find_deck_results(id)
     {:ok, extended_results} = MagiratorQuery.extend_results_visual(game_results) 
 
-    statistical_data = Collector.collect_game_statistics(results)    
+    statistical_data = Statistics.summarize_game_results game_results    
     rating_data = Collector.collect_rating_data(results)
 
     {:ok, endStamp} = DateTime.now("Etc/UTC")
