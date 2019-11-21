@@ -70,24 +70,28 @@ body {
 
 
 /* Table */
-table {
+table.flat-table {
   border: 2px solid black;
   margin: 2px;
   padding: 5px;
   border-collapse: collapse;
+  width: 100%;
 }
 
-th, td {
+.flat-table.cell {
   padding: 5px;
   margin: 2px;
   border-collapse: collapse;
 }
 
-th {
+th.cell {
+  text-align: left;
+  padding: 5px;
   border-bottom: 2px solid black;
 }
 
-td {
+td.cell {
+  padding: 5px;
   border: 1px solid gray;
 }
 
@@ -113,6 +117,14 @@ thead {
 .page-title {
   text-align: center;
   font-size: 1.5em;
+}
+
+.table-title {
+  text-align: left;
+  font-size: 1em;
+  font-weight: bold;
+  margin-top: 20px;
+  margin-left: 5px;
 }
 
 /* Color */

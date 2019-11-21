@@ -33,15 +33,15 @@ defmodule MagiratorGuiPhxWeb.DeckController do
     {:ok, results} = MagiratorStore.list_results_by_deck(id)
     result_summary = MagiratorCalculator.summarize_places(results)
     statistical_data = Statistics.summarize_result_summary(result_summary)
+    rating_data = Rating.rate_all_result_summary(result_summary)
 
-    statistical_data = Statistics.summarize_game_results game_results    
-    rating_data = Collector.collect_rating_data(results)
     {:ok, list_results} = MagiratorQuery.list_deck_results(id)
     grouped_list_results = Collection.group_list_results_by_match(list_results) 
 
     {:ok, endStamp} = DateTime.now("Etc/UTC")
-    time_taken = DateTime.diff(startStamp, endStamp)
+    time_taken = DateTime.diff(endStamp, startStamp)
     IO.puts("Time to fetch deck data: #{time_taken}")
+
 
     render conn, "show.html", %{
       deck: deck, 

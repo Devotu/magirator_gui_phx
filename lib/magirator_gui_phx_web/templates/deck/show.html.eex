@@ -1,9 +1,16 @@
-<h1><%= @deck.name %></h1>
-<div class='button-menu'>
-  <%= button("Main", to: main_path(@conn, :main), method: "get", class: "menu-button") %>
-  <%= button("Decks", to: deck_path(@conn, :index), method: "get", class: "menu-button") %>
+<div class='content'>
+  <div>
+    <%= render(MagiratorGuiPhxWeb.DeckView, "statistics.html", statistical_data: @statistical_data) %>
+  </div>
+  <div>
+    <%= render(MagiratorGuiPhxWeb.DeckView, "rating.html", rating_data: @rating_data) %>
+  </div>
+  <div>
+    <%= render(MagiratorGuiPhxWeb.DeckView, "games.html", %{conn: @conn, deck: @deck, matches: @matches}) %>
+  </div>
 </div>
-
-<%= render(MagiratorGuiPhxWeb.DeckView, "statistics.html", statistical_data: @statistical_data) %>
-<%= render(MagiratorGuiPhxWeb.DeckView, "rating.html", rating_data: @rating_data) %>
-<%= render(MagiratorGuiPhxWeb.DeckView, "games.html", %{conn: @conn, deck: @deck, matches: @matches}) %>
+<div class='menu'>
+  <%= render(ComponentView, "plaque.html", %{title: @deck.name}) %>
+  <%= button("Main", to: main_path(@conn, :main), method: "get", class: "button option-button") %>
+  <%= button("Decks", to: deck_path(@conn, :index), method: "get", class: "button option-button") %>
+</div>
