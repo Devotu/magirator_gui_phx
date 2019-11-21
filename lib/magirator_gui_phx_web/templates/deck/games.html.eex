@@ -1,37 +1,16 @@
-<h3>Games</h3>
+<h3 class="item-title">Games</h3>
 
-<table>
-  <thead>
-    <tr>
-      <th>Matches</th>
-    </tr>
-  </thead>
-  <tbody>
-    <%= for match <- @matches do %>
-    <tr>
-      <td>
-        match <%= match.match_id %>
-        against <%= match.opponent_name %>
-        playing <%= match.opponent_deck_name %>
-        <table>
-          <thead>
-            <tr>
-              <th>Results</th>
-            </tr>
-          </thead>
-          <tbody>
-            <%= for game <- match.results do %>
-            <tr>
-              <td>
-                <%= game.place %>
-              </td>
-            </tr>
-            <% end %>
-          </tbody>
-        </table>
-        <%= if(match.match_id != 0) do button("Delete", to: match_path(@conn, :delete, match.match_id, @deck.id, :deck), method: "delete") end %>
-      </td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class='list'>
+  <%= for match <- @matches do %>
+    <div class="list-item">
+      <%= if(match.match_id != 0) do %>
+      <p class="fact"><%= match.opponent_name %></p>
+      <p class="fact"><%= match.opponent_deck_name %></p>
+      <% end %>
+      <%= for game <- match.results do %>
+        <span class="<%= DisplayHelper.wdl(game.place) %>"><%= game.place %></span>
+      <% end %>
+      <%# <%= if(match.match_id != 0) do button("Delete", to: match_path(@conn, :delete, match.match_id, @deck.id, :deck), method: "delete") end %>
+    </div>
+  <% end %>
+</div>

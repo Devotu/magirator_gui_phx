@@ -1,4 +1,4 @@
-<h3 class="table-title">Ratings</h3>
+<h3 class="item-title">Ratings</h3>
 
 <table class="flat-table">
   <thead>
@@ -12,9 +12,9 @@
   <tbody>
     <tr>
       <td class="flat-table cell <%= DisplayHelper.red_ink(@rating_data.pdiff) %>"><%= @rating_data.pdiff %></td>
-      <td class="flat-table cell <%= DisplayHelper.red_ink(@rating_data.pdiff) %>"><%= @rating_data.pdiff3 %></td>
-      <td class="flat-table cell <%= DisplayHelper.red_ink(@rating_data.pdiff) %>"><%= @rating_data.pdist2positive %></td>
-      <td class="flat-table cell <%= DisplayHelper.red_ink(@rating_data.pdiff) %>"><%= @rating_data.pdist2 %></td>
+      <td class="flat-table cell <%= DisplayHelper.red_ink(@rating_data.pdiff3) %>"><%= @rating_data.pdiff3 %></td>
+      <td class="flat-table cell <%= DisplayHelper.red_ink(@rating_data.pdist2positive) %>"><%= @rating_data.pdist2positive %></td>
+      <td class="flat-table cell <%= DisplayHelper.red_ink(@rating_data.pdist2) %>"><%= @rating_data.pdist2 %></td>
     </tr>
   </tbody>
 </table>

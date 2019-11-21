@@ -39,6 +39,11 @@ body {
 }
 
 .list-item {
+  width: 100px;
+  background-color: white;
+  border: solid 2px black;
+  height: 50px;
+  padding: 5px;;
 }
 
 .page-title {
@@ -100,6 +105,10 @@ thead {
   text-align: start;
 }
 
+p.facts {
+  font-weight: bold;
+}
+
 
 /* Styles */
 /* Text */
@@ -119,7 +128,7 @@ thead {
   font-size: 1.5em;
 }
 
-.table-title {
+.item-title {
   text-align: left;
   font-size: 1em;
   font-weight: bold;
@@ -128,6 +137,10 @@ thead {
 }
 
 /* Color */
+.positive {
+  color: green;
+}
+
 .negative {
   color: red;
 }
