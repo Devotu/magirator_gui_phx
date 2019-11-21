@@ -1,8 +1,9 @@
 defmodule MagiratorGuiPhxWeb.DeckController do
   use MagiratorGuiPhxWeb, :controller
   alias MagiratorStore.Structs.Deck
-  alias MagiratorGuiPhx.Helpers.CollectorHelper, as: Collector
   alias MagiratorGuiPhx.Helpers.StatisticsHelper, as: Statistics
+  alias MagiratorGuiPhx.Helpers.RatingHelper, as: Rating
+  alias MagiratorGuiPhx.Helpers.CollectionHelper, as: Collection
   alias MagiratorGuiPhxWeb.Helpers.GeneralHelper, as: Helper
 
   def new(conn, _params) do
@@ -28,13 +29,15 @@ defmodule MagiratorGuiPhxWeb.DeckController do
   def show(conn, %{"id" => id}) do
     {:ok, startStamp} = DateTime.now("Etc/UTC")
 
-    {:ok, deck} = MagiratorStore.get_deck id
-    {:ok, game_results} = MagiratorStore.list_results_by_deck(id)
-    {:ok, results} = MagiratorQuery.find_deck_results(id)
-    {:ok, extended_results} = MagiratorQuery.extend_results_visual(game_results) 
+    {:ok, deck} = MagiratorStore.get_deck(id)
+    {:ok, results} = MagiratorStore.list_results_by_deck(id)
+    result_summary = MagiratorCalculator.summarize_places(results)
+    statistical_data = Statistics.summarize_result_summary(result_summary)
 
     statistical_data = Statistics.summarize_game_results game_results    
     rating_data = Collector.collect_rating_data(results)
+    {:ok, list_results} = MagiratorQuery.list_deck_results(id)
+    grouped_list_results = Collection.group_list_results_by_match(list_results) 
 
     {:ok, endStamp} = DateTime.now("Etc/UTC")
     time_taken = DateTime.diff(startStamp, endStamp)
@@ -44,7 +47,7 @@ defmodule MagiratorGuiPhxWeb.DeckController do
       deck: deck, 
       statistical_data: statistical_data,
       rating_data: rating_data,
-      matches: extended_results,
+      matches: grouped_list_results,
       timing: time_taken
     }
   end

@@ -4,8 +4,7 @@ defmodule MagiratorGuiPhx.Helpers.StatisticsHelper do
   Summarizes a list of result maps
   Requires the map to contain a field :place 
   """
-  def summarize_game_results(results) do
-    summary = MagiratorCalculator.summarize_places(results)
+  def summarize_result_summary(summary) do
     %{wins: wins, draws: draws, losses: losses} = summary
 
     %{

@@ -10,9 +10,9 @@
     <%= for match <- @matches do %>
     <tr>
       <td>
-        match <%= match.info.match_id %>
-        against <%= match.info.opponent_name %>
-        playing <%= match.info.opponent_deck_name %>
+        match <%= match.match_id %>
+        against <%= match.opponent_name %>
+        playing <%= match.opponent_deck_name %>
         <table>
           <thead>
             <tr>
@@ -29,7 +29,7 @@
             <% end %>
           </tbody>
         </table>
-        <%= if(match.info.match_id != 0) do button("Delete", to: match_path(@conn, :delete, match.info.match_id, @deck.id, :deck), method: "delete") end %>
+        <%= if(match.match_id != 0) do button("Delete", to: match_path(@conn, :delete, match.match_id, @deck.id, :deck), method: "delete") end %>
       </td>
     </tr>
     <% end %>
