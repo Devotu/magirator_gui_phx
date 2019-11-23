@@ -26,4 +26,108 @@ defmodule CollectionHelperTest do
       assert Map.has_key? first, :results
       assert Map.has_key? List.first(first.results), :game_id
     end
+
+
+    test "match_wdl - win" do
+      match = %{
+        match_id: 0,
+        opponent_deck_id: 20,
+        opponent_deck_name: "Deck 1",
+        opponent_name: "Erlango",
+        results: [
+          %{
+            game_id: 46,
+            match_id: 0,
+            opponent_deck_id: 20,
+            opponent_deck_name: "Deck 1",
+            opponent_name: "Erlango",
+            place: 1
+          },
+          %{
+            game_id: 45,
+            match_id: 0,
+            opponent_deck_id: 20,
+            opponent_deck_name: "Deck 1",
+            opponent_name: "Erlango",
+            place: 2
+          },
+          %{
+            game_id: 44,
+            match_id: 0,
+            opponent_deck_id: 20,
+            opponent_deck_name: "Deck 1",
+            opponent_name: "Erlango",
+            place: 1
+          }
+        ]
+      }
+
+      assert 1 == Collection.match_wdl match
+    end
+
+    test "match_wdl - draw" do
+      match = %{
+        match_id: 0,
+        opponent_deck_id: 20,
+        opponent_deck_name: "Deck 1",
+        opponent_name: "Erlango",
+        results: [
+          %{
+            game_id: 45,
+            match_id: 0,
+            opponent_deck_id: 20,
+            opponent_deck_name: "Deck 1",
+            opponent_name: "Erlango",
+            place: 2
+          },
+          %{
+            game_id: 44,
+            match_id: 0,
+            opponent_deck_id: 20,
+            opponent_deck_name: "Deck 1",
+            opponent_name: "Erlango",
+            place: 1
+          }
+        ]
+      }
+
+      assert 0 == Collection.match_wdl match
+    end
+
+    test "match_wdl - loss" do
+      match = %{
+        match_id: 0,
+        opponent_deck_id: 20,
+        opponent_deck_name: "Deck 1",
+        opponent_name: "Erlango",
+        results: [
+          %{
+            game_id: 46,
+            match_id: 0,
+            opponent_deck_id: 20,
+            opponent_deck_name: "Deck 1",
+            opponent_name: "Erlango",
+            place: 2
+          },
+          %{
+            game_id: 45,
+            match_id: 0,
+            opponent_deck_id: 20,
+            opponent_deck_name: "Deck 1",
+            opponent_name: "Erlango",
+            place: 2
+          },
+          %{
+            game_id: 44,
+            match_id: 0,
+            opponent_deck_id: 20,
+            opponent_deck_name: "Deck 1",
+            opponent_name: "Erlango",
+            place: 1
+          }
+        ]
+      }
+
+      assert 2 == Collection.match_wdl match
+    end
   end
