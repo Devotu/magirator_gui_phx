@@ -1,4 +1,4 @@
-defmodule MagiratorGuiPhx.Helpers.RatingHelper do
+defmodule MagiratorGuiPhx.Helpers.Rating do
 
   @doc """
   Summarizes a list of result maps

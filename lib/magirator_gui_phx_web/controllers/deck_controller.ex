@@ -1,10 +1,10 @@
 defmodule MagiratorGuiPhxWeb.DeckController do
   use MagiratorGuiPhxWeb, :controller
   alias MagiratorStore.Structs.Deck
-  alias MagiratorGuiPhx.Helpers.StatisticsHelper, as: Statistics
-  alias MagiratorGuiPhx.Helpers.RatingHelper, as: Rating
-  alias MagiratorGuiPhx.Helpers.CollectionHelper, as: Collection
-  alias MagiratorGuiPhxWeb.Helpers.GeneralHelper, as: Helper
+  alias MagiratorGuiPhx.Helpers.Statistics
+  alias MagiratorGuiPhx.Helpers.Rating
+  alias MagiratorGuiPhx.Helpers.Collection
+  alias MagiratorGuiPhxWeb.Helpers.Helper
 
   def new(conn, _params) do
     render conn, "new.html"
@@ -36,12 +36,11 @@ defmodule MagiratorGuiPhxWeb.DeckController do
     rating_data = Rating.rate_all_result_summary(result_summary)
 
     {:ok, list_results} = MagiratorQuery.list_deck_results(id)
-    grouped_list_results = Collection.group_list_results_by_match(list_results) 
-    IO.puts Kernel.inspect(grouped_list_results)
 
     {:ok, endStamp} = DateTime.now("Etc/UTC")
     time_taken = DateTime.diff(endStamp, startStamp)
     IO.puts("Time to fetch deck data: #{time_taken}")
+    grouped_list_results = Collection.group_list_results_by_match(list_results)
 
 
     render conn, "show.html", %{

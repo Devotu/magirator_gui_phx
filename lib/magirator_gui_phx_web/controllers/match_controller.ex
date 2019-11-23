@@ -4,7 +4,7 @@ defmodule MagiratorGuiPhxWeb.MatchController do
   alias MagiratorStore.Structs.Game
   alias MagiratorStore.Structs.Result
   alias MagiratorStore.Structs.Participant
-  alias MagiratorGuiPhxWeb.Helpers.GeneralHelper, as: Helper
+  alias MagiratorGuiPhxWeb.Helpers.Helper, as: Helper
 
   def new(conn, _params) do
     render conn, "new.html"

@@ -1,7 +1,7 @@
-defmodule CollectionHelperTest do
+defmodule CollectionTest do
   use ExUnit.Case
 
-  alias MagiratorGuiPhx.Helpers.CollectionHelper, as: Collection
+  alias MagiratorGuiPhx.Helpers.Collection
 
   test "group list results by match" do
     results = [

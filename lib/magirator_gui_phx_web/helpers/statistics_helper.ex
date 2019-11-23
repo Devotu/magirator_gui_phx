@@ -1,4 +1,4 @@
-defmodule MagiratorGuiPhx.Helpers.StatisticsHelper do
+defmodule MagiratorGuiPhx.Helpers.Statistics do
 
   @doc """
   Summarizes a list of result maps

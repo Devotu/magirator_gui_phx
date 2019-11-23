@@ -1,4 +1,4 @@
-defmodule MagiratorGuiPhx.Helpers.CollectionHelper do
+defmodule MagiratorGuiPhx.Helpers.Collection do
 
   def group_list_results_by_match(results) do
     results
