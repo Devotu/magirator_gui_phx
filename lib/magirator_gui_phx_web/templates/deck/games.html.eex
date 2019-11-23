@@ -1,16 +1,25 @@
-<h3 class="item-title">Games</h3>
+<h3 class="list-title">Games</h3>
 
 <div class='list'>
   <%= for match <- @matches do %>
+    <%= if(match.match_id != 0) do %>
     <div class="list-item">
-      <%= if(match.match_id != 0) do %>
       <p class="fact"><%= match.opponent_name %></p>
       <p class="fact"><%= match.opponent_deck_name %></p>
-      <% end %>
       <%= for game <- match.results do %>
         <span class="<%= DisplayHelper.wdl(game.place) %>"><%= game.place %></span>
       <% end %>
-      <%# <%= if(match.match_id != 0) do button("Delete", to: match_path(@conn, :delete, match.match_id, @deck.id, :deck), method: "delete") end %>
     </div>
+    <% else %>
+    <%= for game <- match.results do %>
+    <div class="list-item">
+      <p class="fact"><%= game.opponent_name %></p>
+      <p class="fact"><%= game.opponent_deck_name %></p>
+      <span class="<%= DisplayHelper.wdl(game.place) %>"><%= game.place %></span>
+    </div>
+    <% end %>
+    <% end %>
+      <%# <%= if(match.match_id != 0) do button("Delete", to: match_path(@conn, :delete, match.match_id, @deck.id, :deck), method: "delete") end %>
+    
   <% end %>
 </div>
