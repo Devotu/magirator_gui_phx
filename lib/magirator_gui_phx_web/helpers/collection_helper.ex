@@ -15,4 +15,18 @@ defmodule MagiratorGuiPhx.Helpers.CollectionHelper do
       ]
     end)
   end
+
+  def match_wdl(match) do
+    wins = Enum.count(match.results, &(&1.place == 1))
+    losses = Enum.count(match.results, &(&1.place > 1))
+
+    case {wins > losses, wins < losses} do
+      {true, _} ->
+        1
+      {_, true} ->
+        2
+      _ -> 
+        0        
+    end            
+  end
 end

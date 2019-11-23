@@ -37,6 +37,7 @@ defmodule MagiratorGuiPhxWeb.DeckController do
 
     {:ok, list_results} = MagiratorQuery.list_deck_results(id)
     grouped_list_results = Collection.group_list_results_by_match(list_results) 
+    IO.puts Kernel.inspect(grouped_list_results)
 
     {:ok, endStamp} = DateTime.now("Etc/UTC")
     time_taken = DateTime.diff(endStamp, startStamp)

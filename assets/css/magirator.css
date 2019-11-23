@@ -43,7 +43,7 @@ body {
   background-color: white;
   border: solid 2px black;
   height: 50px;
-  padding: 5px;;
+  padding: 5px;
 }
 
 .page-title {
@@ -152,4 +152,16 @@ p.facts {
 
 .negative {
   color: red;
+}
+
+.negative-backdrop {
+  background-color: tomato;
+}
+
+.neutral-backdrop {
+  background-color:lightgray;
+}
+
+.positive-backdrop {
+  background-color: darkseagreen;
 }
