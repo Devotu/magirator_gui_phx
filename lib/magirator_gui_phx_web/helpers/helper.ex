@@ -34,4 +34,15 @@ defmodule MagiratorGuiPhxWeb.Helpers.Helper do
         :caller_error
     end
   end
+
+  def mics_to_ms(microseconds) do
+    microseconds/1000
+  end
+
+  def clock(mark, fun, args) do
+    {time, result} = :timer.tc(fun, args)
+    ms_time = mics_to_ms(time)
+    IO.puts(mark <> ": #{ms_time} ms")
+    result
+  end
 end

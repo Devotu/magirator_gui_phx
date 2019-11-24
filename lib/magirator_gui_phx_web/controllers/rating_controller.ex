@@ -1,6 +1,6 @@
 defmodule MagiratorGuiPhxWeb.RatingController do
   use MagiratorGuiPhxWeb, :controller
-  alias MagiratorGuiPhx.Helpers.CollectorHelper, as: Collector
+  alias MagiratorGuiPhx.Helpers.Collector
 
   def index(conn, _params) do
     {:ok, startStamp} = DateTime.now("Etc/UTC")
