@@ -27,7 +27,7 @@ defmodule MagiratorGuiPhxWeb.DeckController do
   end
 
   def show(conn, %{"id" => id}) do
-    {:ok, startStamp} = DateTime.now("Etc/UTC")
+    startStamp = :erlang.timestamp()
 
     {:ok, deck} = MagiratorStore.get_deck(id)
     {:ok, results} = MagiratorStore.list_results_by_deck(id)
@@ -36,12 +36,11 @@ defmodule MagiratorGuiPhxWeb.DeckController do
     rating_data = Rating.rate_all_result_summary(result_summary)
 
     {:ok, list_results} = MagiratorQuery.list_deck_results(id)
-
-    {:ok, endStamp} = DateTime.now("Etc/UTC")
-    time_taken = DateTime.diff(endStamp, startStamp)
-    IO.puts("Time to fetch deck data: #{time_taken}")
     grouped_list_results = Collection.group_list_results_by_match(list_results)
 
+    endStamp = :erlang.timestamp()
+    time_taken = (:timer.now_diff endStamp, startStamp)/1000/1000
+    IO.puts("Time to fetch and calculate deck data: #{time_taken}")
 
     render conn, "show.html", %{
       deck: deck, 
