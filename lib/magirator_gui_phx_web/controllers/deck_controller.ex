@@ -30,8 +30,10 @@ defmodule MagiratorGuiPhxWeb.DeckController do
     {:ok, deck} = MagiratorStore.get_deck(id)
     {:ok, results} = MagiratorStore.list_results_by_deck(id)
     result_summary = MagiratorCalculator.summarize_places(results)
+    IO.puts(Kernel.inspect(result_summary))
     statistical_data = Statistics.summarize_result_summary(result_summary)
     rating_data = Rating.rate_all_result_summary(result_summary)
+    IO.puts(Kernel.inspect(rating_data)) #TODO
 
     {:ok, list_results} = MagiratorQuery.list_deck_results(id)
     grouped_list_results = Collection.group_list_results_by_match(list_results)
