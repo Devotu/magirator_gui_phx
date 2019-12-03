@@ -46,11 +46,7 @@
     </div>
   </div>
   <%= submit("Create", class: "button border do submit") %>
-
 <% end %>
-
-  <div class='list'>
-  </div>
 </div>
 
 <div class='menu'>
@@ -60,4 +56,3 @@
   <%= button("Main", to: main_path(@conn, :main), method: "get", class: "button border back-button") %>
   <%= render(MagiratorGuiPhxWeb.MainView, "options.html", %{conn: @conn}) %>
 </div>
-
