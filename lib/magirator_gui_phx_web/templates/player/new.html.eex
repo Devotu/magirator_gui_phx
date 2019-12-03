@@ -1,24 +1,15 @@
 <div class='content'>
   <%= form_for @conn, player_path(@conn, :create), [as: :new_player], fn f -> %>
-  <h3 class="item-title">Name</h3>
-  <div class='option-box'>
-    <%= text_input(f, :name, class: "input-row input-text border") %>
-  </div>
-  <h3 class="item-title">Email</h3>
-  <div class='option-box'>
-    <%= text_input(f, :email, class: "input-row input-text border") %>
-  </div>  
-  <h3 class="item-title">Password</h3>
-  <div class='option-box'>
-    <%= text_input(f, :password, class: "input-row input-text border") %>
-  </div>
+  <%= render(ComponentView, "input_text.html", %{form: f, label: "Name", name: :name}) %>
+  <%= render(ComponentView, "input_text.html", %{form: f, label: "Email", name: :email}) %>
+  <%= render(ComponentView, "input_text.html", %{form: f, label: "Password", name: :password}) %>
   <%= submit("Create", class: "button border do submit") %>
-<% end %>
+  <% end %>
 </div>
 
 <div class='menu'>
   <div class='button-plaque'>
-    <h4 class='page-title'>+Deck</h4>
+    <h4 class='page-title'>+Player</h4>
   </div>
   <%= button("Main", to: main_path(@conn, :main), method: "get", class: "button border back-button") %>
   <%= render(MagiratorGuiPhxWeb.MainView, "options.html", %{conn: @conn}) %>

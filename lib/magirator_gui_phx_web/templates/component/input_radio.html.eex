@@ -1,0 +1,3 @@
+<div class='input-row'>
+  <%=label(@form, @value, @label)%> <%= radio_button(@form, @name, @value, class: "input-radio") %>
+</div>

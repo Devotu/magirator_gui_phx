@@ -1,29 +1,16 @@
 <div class='content'>
   <%= form_for @conn, deck_path(@conn, :create), [as: :new_deck, class: "form"], fn f -> %>
-  <h3 class="item-title">Player</h3>
-  <div class='option-box'>
-    <%= render( ComponentView, "select_player.html", form: :new_deck, tag: :player_id ) %>
-  </div>
-  <h3 class="item-title">Name</h3>
-  <div class='option-box'>
-    <%= text_input(f, :name, class: "input-row input-text border") %>
-  </div>
-  <h3 class="item-title">Theme</h3>
-  <div class='option-box'>
-    <%= text_input(f, :theme, class: "input-row input-text border") %>
-  </div>
-  <h3 class="item-title">Format</h3>
-  <div class='input-box'>
-    <div class='input-row'>
-      <%=label(f, :block, "Block")%> <%= radio_button(f, :format, "block", class: "input-radio") %>
-    </div>
-    <div class='input-row'>
-      <%=label(f, :standard, "Standard")%> <%= radio_button(f, :format, "standard", class: "input-radio") %>
-    </div>
-    <div class='input-row'>
-      <%=label(f, :modern, "Modern")%> <%= radio_button(f, :format, "modern", class: "input-radio") %>
-    </div>    
-  </div>
+  
+  <%= render(ComponentView, "select_player.html", %{form: f, label: "Player", tag: :player_id}) %>
+  
+  <%= render(ComponentView, "input_text.html", %{form: f, label: "Name", name: :name}) %>
+  <%= render(ComponentView, "input_text.html", %{form: f, label: "Theme", name: :theme}) %>
+  
+  <%= render(ComponentView, "input_label.html", %{label: "Format"}) %>
+  <%= render(ComponentView, "input_radio.html", %{form: f, label: "Block", name: :format, value: "block"}) %>
+  <%= render(ComponentView, "input_radio.html", %{form: f, label: "Standard", name: :format, value: "standard"}) %>
+  <%= render(ComponentView, "input_radio.html", %{form: f, label: "Modern", name: :format, value: "modern"}) %>
+  
   <h3 class="item-title">Colors</h3>
   <div class='option-box'>
     <div class='input-row'>
@@ -45,14 +32,14 @@
       <%=label(f, :colorless, "Colorless")%> <%= checkbox(f, :colorless, class: "input-check")%>
     </div>
   </div>
+  
   <%= submit("Create", class: "button border do submit") %>
-<% end %>
+  
+  <% end %>
 </div>
 
 <div class='menu'>
-  <div class='button-plaque'>
-    <h4 class='page-title'>+Deck</h4>
-  </div>
+  <%= render(ComponentView, "plaque.html", %{title: "+Deck"}) %>
   <%= button("Main", to: main_path(@conn, :main), method: "get", class: "button border back-button") %>
   <%= render(MagiratorGuiPhxWeb.MainView, "options.html", %{conn: @conn}) %>
 </div>

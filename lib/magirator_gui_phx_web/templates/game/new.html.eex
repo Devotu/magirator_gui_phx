@@ -1,30 +1,27 @@
-<h1>Add new game</h1>
-
-<%= form_for @conn, game_path(@conn, :create), [as: :game], fn f -> %>
+<div class='content'>
+  <%= form_for @conn, game_path(@conn, :create), [as: :game], fn f -> %>
   
-  <%= render( ComponentView, "select_player.html", form: :game, tag: :creator_id ) %>
+  <%= render(ComponentView, "select_player.html", %{form: f, label: "Player", tag: :creator_id}) %>
   <%= render( ComponentView, "select_deck.html", form: :game, tag: :creator_deck_id ) %>
 
-  <br>
-  vs
-  <br>
+  <div class="breaker">vs</div>
 
-  <%= render( ComponentView, "select_player.html", form: :game, tag: :opponent_id ) %>
-  <%= render( ComponentView, "select_deck.html", form: :game, tag: :opponent_deck_id ) %>
+  <%= render(ComponentView, "select_player.html", %{form: f, label: "Player Opponent", tag: :opponent_id}) %>
+  <%= render(ComponentView, "select_deck.html", form: :game, tag: :opponent_deck_id) %>
 
-  <%= label(f, :conclusion, "Conclusion") %> </br>
-  Victory <%= radio_button(f, :conclusion, "victory") %> </br>
-  Draw <%= radio_button(f, :conclusion, "draw") %> </br>
-  Defeat <%= radio_button(f, :conclusion, "defeat") %> </br>
+  <%= render(ComponentView, "input_label.html", %{label: "Conclusion"}) %>
+  <%= render(ComponentView, "input_radio.html", %{form: f, label: "Victory", name: :conclusion, value: "victory"}) %>
+  <%= render(ComponentView, "input_radio.html", %{form: f, label: "Draw", name: :conclusion, value: "draw"}) %>
+  <%= render(ComponentView, "input_radio.html", %{form: f, label: "Defeat", name: :conclusion, value: "defeat"}) %>
 
-  <br>
+  <%= render(ComponentView, "input_text.html", %{form: f, label: "Comment", name: :comment}) %>
+  <%= submit("Create", class: "button border do submit") %>
+  
+  <% end %>
+</div>
 
-  <%= label(f, :comment, "Comment") %> </br>
-  <%= text_input(f, :comment) %> </br>
-
-  <br>
-
-  <%= submit("Create") %><br>
-  <%= button("Main", to: main_path(@conn, :main), method: "get") %><br>
-
-<% end %>
+<div class='menu'>
+  <%= render(ComponentView, "plaque.html", %{title: "+Game"}) %>
+  <%= button("Main", to: main_path(@conn, :main), method: "get", class: "button border back-button") %>
+  <%= render(MagiratorGuiPhxWeb.MainView, "options.html", %{conn: @conn}) %>
+</div>
