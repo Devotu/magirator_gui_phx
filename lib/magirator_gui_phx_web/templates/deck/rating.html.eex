@@ -1,20 +1,20 @@
 <h3 class="item-title">Ratings</h3>
 
-<table class="flat-table">
+<table class="flat-table border">
   <thead>
     <tr>
-      <th class="flat-table cell">P-Diff (no cap)</th>
-      <th class="flat-table cell">P-Diff (cap 3)</th>
-      <th class="flat-table cell">P-Dist+ (2)</th>
-      <th class="flat-table cell">P-Dist (2)</th>
+      <th class="flat-table border cell">P-Diff (no cap)</th>
+      <th class="flat-table border cell">P-Diff (cap 3)</th>
+      <th class="flat-table border cell">P-Dist+ (2)</th>
+      <th class="flat-table border cell">P-Dist (2)</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td class="flat-table cell <%= DisplayHelper.red_ink(@rating_data.pdiff) %>"><%= @rating_data.pdiff %></td>
-      <td class="flat-table cell <%= DisplayHelper.red_ink(@rating_data.pdiff3) %>"><%= @rating_data.pdiff3 %></td>
-      <td class="flat-table cell <%= DisplayHelper.red_ink(@rating_data.pdist2positive) %>"><%= @rating_data.pdist2positive %></td>
-      <td class="flat-table cell <%= DisplayHelper.red_ink(@rating_data.pdist2) %>"><%= @rating_data.pdist2 %></td>
+      <td class="flat-table border cell <%= DisplayHelper.red_ink(@rating_data.pdiff) %>"><%= @rating_data.pdiff %></td>
+      <td class="flat-table border cell <%= DisplayHelper.red_ink(@rating_data.pdiff3) %>"><%= @rating_data.pdiff3 %></td>
+      <td class="flat-table border cell <%= DisplayHelper.red_ink(@rating_data.pdist2positive) %>"><%= @rating_data.pdist2positive %></td>
+      <td class="flat-table border cell <%= DisplayHelper.red_ink(@rating_data.pdist2) %>"><%= @rating_data.pdist2 %></td>
     </tr>
   </tbody>
 </table>

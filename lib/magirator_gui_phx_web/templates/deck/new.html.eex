@@ -1,28 +1,63 @@
-New deck
-
-<%= form_for @conn, deck_path(@conn, :create), [as: :new_deck], fn f -> %>
-  <%= render( ComponentView, "select_player.html", form: :new_deck, tag: :player_id ) %>
-</br>
-  <%= label(f, :name, "Name") %> </br>
-  <%= text_input(f, :name) %> </br>
-</br>
-  <%= label(f, :theme, "Theme") %> </br>
-  <%= text_input(f, :theme) %> </br>
-</br>
-  <%= label(f, :format, "Format") %> </br>
-  Block <%= radio_button(f, :format, "block") %> </br>
-  Standard <%= radio_button(f, :format, "standard") %> </br>
-  Modern <%= radio_button(f, :format, "modern") %> </br>
-</br>
-  <%= label(f, :black, "Colors") %> </br>
-  Black <%= checkbox(f, :black)%> </br>
-  White <%= checkbox(f, :white)%> </br>
-  Red <%= checkbox(f, :red)%> </br>
-  Green <%= checkbox(f, :green)%> </br>
-  Blue <%= checkbox(f, :blue)%> </br>
-  Colorles <%= checkbox(f, :colorless)%> </br>
-</br>
-  <%= submit("Create") %>
-  <%= button("Main", to: main_path(@conn, :main), method: "get") %>
+<div class='content'>
+  <%= form_for @conn, deck_path(@conn, :create), [as: :new_deck, class: "form"], fn f -> %>
+  <h3 class="item-title">Player</h3>
+  <div class='option-box'>
+    <%= render( ComponentView, "select_player.html", form: :new_deck, tag: :player_id ) %>
+  </div>
+  <h3 class="item-title">Name</h3>
+  <div class='option-box'>
+    <%= text_input(f, :name, class: "input-row input-text border") %>
+  </div>
+  <h3 class="item-title">Theme</h3>
+  <div class='option-box'>
+    <%= text_input(f, :theme, class: "input-row input-text border") %>
+  </div>
+  <h3 class="item-title">Format</h3>
+  <div class='input-box'>
+    <div class='input-row'>
+      <%=label(f, :block, "Block")%> <%= radio_button(f, :format, "block", class: "input-radio") %>
+    </div>
+    <div class='input-row'>
+      <%=label(f, :standard, "Standard")%> <%= radio_button(f, :format, "standard", class: "input-radio") %>
+    </div>
+    <div class='input-row'>
+      <%=label(f, :modern, "Modern")%> <%= radio_button(f, :format, "modern", class: "input-radio") %>
+    </div>    
+  </div>
+  <h3 class="item-title">Colors</h3>
+  <div class='option-box'>
+    <div class='input-row'>
+      <%=label(f, :black, "Black")%> <%= checkbox(f, :black, class: "input-check")%>    
+    </div>
+    <div class='input-row'>
+      <%=label(f, :white, "White")%> <%= checkbox(f, :white, class: "input-check")%>    
+    </div>
+    <div class='input-row'>
+      <%=label(f, :red, "Red")%> <%= checkbox(f, :red, class: "input-check")%>    
+    </div>
+    <div class='input-row'>
+      <%=label(f, :green, "Green")%> <%= checkbox(f, :green, class: "input-check")%>
+    </div>
+    <div class='input-row'>
+      <%=label(f, :blue, "Blue")%> <%= checkbox(f, :blue, class: "input-check")%>
+    </div>
+    <div class='input-row'>
+      <%=label(f, :colorless, "Colorless")%> <%= checkbox(f, :colorless, class: "input-check")%>
+    </div>
+  </div>
+  <%= submit("Create", class: "button border do submit") %>
 
 <% end %>
+
+  <div class='list'>
+  </div>
+</div>
+
+<div class='menu'>
+  <div class='button-plaque'>
+    <h4 class='page-title'>+Deck</h4>
+  </div>
+  <%= button("Main", to: main_path(@conn, :main), method: "get", class: "button border back-button") %>
+  <%= render(MagiratorGuiPhxWeb.MainView, "options.html", %{conn: @conn}) %>
+</div>
+

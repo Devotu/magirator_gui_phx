@@ -1,22 +1,22 @@
 <h3 class="item-title">Statistics</h3>
 
-<table class="flat-table">
+<table class="flat-table border">
   <thead>
     <tr>
-      <th class="flat-table cell">Games</th>
-      <th class="flat-table cell">Wins</th>
-      <th class="flat-table cell">Draws</th>
-      <th class="flat-table cell">Losses</th>
-      <th class="flat-table cell">Winrate</th>
+      <th class="flat-table border cell">Games</th>
+      <th class="flat-table border cell">Wins</th>
+      <th class="flat-table border cell">Draws</th>
+      <th class="flat-table border cell">Losses</th>
+      <th class="flat-table border cell">Winrate</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td class="flat-table cell"><%= @statistical_data.games %></td>
-      <td class="flat-table cell"><%= @statistical_data.wins %></td>
-      <td class="flat-table cell"><%= @statistical_data.draws %></td>
-      <td class="flat-table cell"><%= @statistical_data.losses %></td>
-      <td class="flat-table cell"><%= @statistical_data.winrate %>%</td>
+      <td class="flat-table border cell"><%= @statistical_data.games %></td>
+      <td class="flat-table border cell"><%= @statistical_data.wins %></td>
+      <td class="flat-table border cell"><%= @statistical_data.draws %></td>
+      <td class="flat-table border cell"><%= @statistical_data.losses %></td>
+      <td class="flat-table border cell"><%= @statistical_data.winrate %>%</td>
     </tr>
   </tbody>
 </table>

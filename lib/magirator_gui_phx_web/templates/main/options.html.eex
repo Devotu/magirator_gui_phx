@@ -1,6 +1,6 @@
-<%= button("New Player", to: player_path(@conn, :new), method: "get", class: "button option-button") %>
-<%= button("New Deck", to: deck_path(@conn, :new), method: "get", class: "button option-button") %>
-<%= button("Decks", to: deck_path(@conn, :index), method: "get", class: "button option-button") %>
-<%= button("New Game", to: game_path(@conn, :new), method: "get", class: "button option-button") %>
-<%= button("New Match", to: match_path(@conn, :new), method: "get", class: "button option-button") %>
-<%= button("Ratings", to: rating_path(@conn, :index), method: "get", class: "button option-button") %>
+<%= button("New Player", to: player_path(@conn, :new), method: "get", class: "button border option-button") %>
+<%= button("New Deck", to: deck_path(@conn, :new), method: "get", class: "button border option-button") %>
+<%= button("Decks", to: deck_path(@conn, :index), method: "get", class: "button border option-button") %>
+<%= button("New Game", to: game_path(@conn, :new), method: "get", class: "button border option-button") %>
+<%= button("New Match", to: match_path(@conn, :new), method: "get", class: "button border option-button") %>
+<%= button("Ratings", to: rating_path(@conn, :index), method: "get", class: "button border option-button") %>

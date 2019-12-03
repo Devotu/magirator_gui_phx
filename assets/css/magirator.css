@@ -34,8 +34,9 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fill, 100px);
   grid-gap: 10px;  
-  justify-content: center;
+  justify-content: flex-start;
   padding-top: 25px;
+  margin: 2px;
 }
 
 .list-item {
@@ -51,16 +52,55 @@ body {
   margin: auto;
 }
 
+.input-box {
+  display: flex;
+  flex-direction: column;
+  max-width: 300px;
+}
+
+.input-row {
+  display: flex;
+  flex-direction: row;
+  margin-top: 5px;
+  margin-left: 24px;
+  width: 100%;
+  max-width: 300px;
+}
+
+.form {
+  margin: 2px;
+  padding: 2px;
+}
+
+/* Input */
+.input-text {
+  border: 2px solid black;
+}
+
+.input-radio {
+  margin-left: 10px;
+  margin-top: 0px;
+}
+
+.input-check {
+  margin-left: 10px;
+  margin-top: 0px;
+}
+
 /* Buttons */
 .button {
   width: 100px;
   background-color: white;
-  border: solid 2px black;
   height: 50px;
 }
 
 .back-button {
   /* background-color: lightgray; */
+}
+
+.submit {
+  margin: 5px;
+  margin-top: 12px;
 }
 
 .button-plaque {
@@ -76,7 +116,6 @@ body {
 
 /* Table */
 table.flat-table {
-  border: 2px solid black;
   margin: 2px;
   padding: 5px;
   border-collapse: collapse;
@@ -111,6 +150,18 @@ p.facts {
 
 
 /* Styles */
+.border-l {
+  border: 1px solid black;
+}
+
+.border {
+  border: 2px solid black;
+}
+
+.border-h {
+  border: 4px solid black;
+}
+
 /* Text */
 * {
   font-family: 'Courier New', Courier, monospace;

@@ -1,7 +1,7 @@
 <div class='content'>
   <div class='list'>
     <%= for deck <- @decks do %>
-      <%= button(deck.name, to: deck_path(@conn, :show, deck.id), method: "get", class: "button list-item") %>
+      <%= button(deck.name, to: deck_path(@conn, :show, deck.id), method: "get", class: "button border list-item") %>
     <% end %>
   </div>
 </div>
@@ -10,6 +10,6 @@
   <div class='button-plaque'>
     <h4 class='page-title'>Decks</h4>
   </div>
-  <%= button("Main", to: main_path(@conn, :main), method: "get", class: "button back-button") %>
+  <%= button("Main", to: main_path(@conn, :main), method: "get", class: "button border back-button") %>
   <%= render(MagiratorGuiPhxWeb.MainView, "options.html", %{conn: @conn}) %>
 </div>
