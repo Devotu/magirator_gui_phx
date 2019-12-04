@@ -8,7 +8,7 @@ defmodule MagiratorGuiPhxWeb.ComponentView do
 
     selectable_players = Enum.map(players, fn p -> [key: p.name, value: p.id] end)
 
-    select(form, tag, selectable_players, class: "input-row input-select")
+    select(form, tag, selectable_players, class: "input-row input-select border")
   end
 
 
@@ -17,6 +17,6 @@ defmodule MagiratorGuiPhxWeb.ComponentView do
 
     selectable_decks = Enum.map(decks, fn d -> [key: d.name, value: d.id] end)
 
-    select(form, tag, selectable_decks, class: "input-row input-select")
+    select(form, tag, selectable_decks, class: "input-row input-select border")
   end
 end

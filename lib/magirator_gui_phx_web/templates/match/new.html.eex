@@ -1,18 +1,21 @@
 
-<%= form_for @conn, match_path(@conn, :create), [as: :match], fn f -> %>
-  <div>
-    <%= render( ComponentView, "select_player.html", form: :match, tag: :player_one_id ) %>
-    <%= render( ComponentView, "select_deck.html", form: :match, tag: :player_one_deck_id ) %>
+<div class='content'>
+  <%= form_for @conn, match_path(@conn, :create), [as: :match], fn f -> %>
 
-    <br>
-    vs
-    <br>
+    <%= render(ComponentView, "select_player.html", %{form: f, label: "Player", tag: :player_one_id}) %>
+    <%= render(ComponentView, "select_deck.html", form: :match, tag: :player_one_deck_id) %>
 
-    <%= render( ComponentView, "select_player.html", form: :match, tag: :player_two_id ) %>
-    <%= render( ComponentView, "select_deck.html", form: :match, tag: :player_two_deck_id ) %>
-  </div>
+    <div class="breaker">vs</div>
 
-  <%= submit("Create") %><br>
-  <%= button("Main", to: main_path(@conn, :main), method: "get") %><br>
+    <%= render(ComponentView, "select_player.html", %{form: f, label: "Player", tag: :player_two_id}) %>
+    <%= render(ComponentView, "select_deck.html", form: :match, tag: :player_two_deck_id) %>
 
-<% end %>
+  <%= submit("Create", class: "button border do submit") %>
+  <% end %>
+</div>
+
+<div class='menu'>
+  <%= render(ComponentView, "plaque.html", %{title: "+Match"}) %>
+  <%= button("Main", to: main_path(@conn, :main), method: "get", class: "button border back-button") %>
+  <%= render(MagiratorGuiPhxWeb.MainView, "options.html", %{conn: @conn}) %>
+</div>

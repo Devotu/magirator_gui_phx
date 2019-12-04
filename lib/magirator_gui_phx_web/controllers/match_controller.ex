@@ -61,7 +61,8 @@ defmodule MagiratorGuiPhxWeb.MatchController do
     render conn, "show.html", %{
         match: match, game_results: game_results, 
         player_one: player_one, deck_one: deck_one,
-        player_two: player_two, deck_two: deck_two
+        player_two: player_two, deck_two: deck_two,
+        players: [player_one, player_two]
       }
   end
 

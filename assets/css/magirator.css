@@ -52,6 +52,28 @@ body {
   margin: auto;
 }
 
+.box {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  max-width: 300px;
+  padding: 5px;
+}
+
+.vs-row {
+  display: flex;
+  flex-direction: column;
+  margin: 2px;
+  padding: 2px;
+}
+
+@media screen and (min-width: 300px) {
+  .vs-row {
+    display: flex;
+    flex-direction: row;
+  }  
+}
+
 .input-box {
   display: flex;
   flex-direction: column;
@@ -73,8 +95,21 @@ body {
 }
 
 .breaker {
-  margin-left: 12px;
-  margin-top: 24px;
+  margin: 12px;
+  flex-direction: column;
+}
+
+/* Adjustments */
+.top {
+  margin-top: 20px;
+}
+
+.center {
+  display: flex;
+}
+
+.full {
+  width: 100%;
 }
 
 /* Input */
@@ -90,6 +125,10 @@ body {
 .input-check {
   margin-left: 10px;
   margin-top: 0px;
+}
+
+.input-select {
+  background-color: white;
 }
 
 /* Buttons */
@@ -200,6 +239,14 @@ p.facts {
   margin-top: 20px;
   margin-left: 5px;
   margin-bottom: -20px;
+}
+
+.name {
+  font-size: 1em;
+  font-weight: bold;
+  margin-top: 5px;
+  margin-left: 5px;
+  text-align: center;
 }
 
 /* Color */

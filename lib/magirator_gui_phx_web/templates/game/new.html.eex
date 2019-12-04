@@ -2,7 +2,7 @@
   <%= form_for @conn, game_path(@conn, :create), [as: :game], fn f -> %>
   
   <%= render(ComponentView, "select_player.html", %{form: f, label: "Player", tag: :creator_id}) %>
-  <%= render( ComponentView, "select_deck.html", form: :game, tag: :creator_deck_id ) %>
+  <%= render(ComponentView, "select_deck.html", form: :game, tag: :creator_deck_id) %>
 
   <div class="breaker">vs</div>
 
@@ -15,8 +15,8 @@
   <%= render(ComponentView, "input_radio.html", %{form: f, label: "Defeat", name: :conclusion, value: "defeat"}) %>
 
   <%= render(ComponentView, "input_text.html", %{form: f, label: "Comment", name: :comment}) %>
-  <%= submit("Create", class: "button border do submit") %>
   
+  <%= submit("Create", class: "button border do submit") %>
   <% end %>
 </div>
 
