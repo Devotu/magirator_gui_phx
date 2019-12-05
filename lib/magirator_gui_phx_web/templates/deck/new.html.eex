@@ -41,5 +41,4 @@
 <div class='menu'>
   <%= render(ComponentView, "plaque.html", %{title: "+Deck"}) %>
   <%= button("Main", to: main_path(@conn, :main), method: "get", class: "button border back-button") %>
-  <%= render(MagiratorGuiPhxWeb.MainView, "options.html", %{conn: @conn}) %>
 </div>

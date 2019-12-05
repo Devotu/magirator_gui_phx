@@ -12,5 +12,4 @@
     <h4 class='page-title'>+Player</h4>
   </div>
   <%= button("Main", to: main_path(@conn, :main), method: "get", class: "button border back-button") %>
-  <%= render(MagiratorGuiPhxWeb.MainView, "options.html", %{conn: @conn}) %>
 </div>

@@ -11,5 +11,5 @@
     <h4 class='page-title'>Decks</h4>
   </div>
   <%= button("Main", to: main_path(@conn, :main), method: "get", class: "button border back-button") %>
-  <%= render(MagiratorGuiPhxWeb.MainView, "options.html", %{conn: @conn}) %>
+  <%= button("New Deck", to: deck_path(@conn, :new), method: "get", class: "button border option-button") %>
 </div>
