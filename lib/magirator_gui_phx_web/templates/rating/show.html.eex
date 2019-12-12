@@ -1,0 +1,10 @@
+<div class='content'>
+  <h3 class="item-title">Rankings</h3> Show
+  <div>
+    <%= render(MagiratorGuiPhxWeb.RatingView, "rating.html", ratings: @ratings) %>
+  </div>
+</div>
+<div class='menu'>
+  <%= render(ComponentView, "plaque.html", %{title: "Ranking"}) %>
+  <%= button("Main", to: main_path(@conn, :main), method: "get", class: "button border option-button") %>
+</div>

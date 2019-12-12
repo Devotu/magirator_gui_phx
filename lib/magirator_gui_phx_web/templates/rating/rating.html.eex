@@ -1,0 +1,30 @@
+  <table id='ratingTable' data-sort-target='ratingTable' class="flat-table border">
+    <thead>
+      <tr>
+        <th class='flat-table border cell sortButton' data-sort-column='0' data-sort-desc='0'>Name</th>
+        <th class='flat-table border cell sortButton' data-sort-column='1' data-sort-desc='0'>Games</th>
+        <th class='flat-table border cell sortButton' data-sort-column='2' data-sort-desc='0'>Wins</th>
+        <th class='flat-table border cell sortButton' data-sort-column='3' data-sort-desc='0'>Losses</th>
+        <th class='flat-table border cell sortButton' data-sort-column='4' data-sort-desc='0'>Winrate</th>
+        <th class='flat-table border cell sortButton' data-sort-column='5' data-sort-desc='0'>P-Diff (no cap)</th>
+        <th class='flat-table border cell sortButton' data-sort-column='6' data-sort-desc='0'>P-Diff (cap 3)</th>
+        <th class='flat-table border cell sortButton' data-sort-column='7' data-sort-desc='0'>P-Dist+ (2)</th>
+        <th class='flat-table border cell sortButton' data-sort-column='8' data-sort-desc='0'>P-Dist (2)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= for rating <- @ratings do %>
+      <tr>
+        <td class='flat-table border cell'><%= rating.deck_name %></td>
+        <td class='flat-table border cell'><%= rating.statistical_data.games %></td>
+        <td class='flat-table border cell'><%= rating.statistical_data.wins %></td>
+        <td class='flat-table border cell'><%= rating.statistical_data.losses %></td>
+        <td class='flat-table border cell'><%= rating.statistical_data.winrate %></td>
+        <td class='flat-table border cell <%= DisplayHelper.red_ink(rating.rating_data.pdiff) %>'><%= rating.rating_data.pdiff %></td>
+        <td class='flat-table border cell <%= DisplayHelper.red_ink(rating.rating_data.pdiff3) %>'><%= rating.rating_data.pdiff3 %></td>
+        <td class='flat-table border cell <%= DisplayHelper.red_ink(rating.rating_data.pdist2positive) %>'><%= rating.rating_data.pdist2positive %></td>
+        <td class='flat-table border cell <%= DisplayHelper.red_ink(rating.rating_data.pdist2) %>'><%= rating.rating_data.pdist2 %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>

@@ -16,7 +16,7 @@ defmodule MagiratorGuiPhxWeb.RatingController do
           rating_data: Rating.rate_results(results),
         } end)
 
-    render conn, "list.html", ratings: ratings
+    render conn, "show.html", ratings: ratings
   end
 
 end
