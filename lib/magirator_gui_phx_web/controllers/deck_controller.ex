@@ -27,12 +27,12 @@ defmodule MagiratorGuiPhxWeb.DeckController do
   end
 
   def show(conn, %{"id" => id}) do
-    {:ok, deck} = MagiratorStore.get_deck(id)
-    
+    {:ok, deck} = MagiratorStore.get_deck(id)    
     {:ok, list_results} = MagiratorQuery.list_deck_results(id)
-    grouped_list_results = Collection.group_list_results_by_match(list_results)
-    rating_data = Rating.rate_results(list_results)
+
     statistical_data = Statistics.summarize_results(list_results)
+    rating_data = Rating.rate_results(list_results)
+    grouped_list_results = Collection.group_list_results_by_match(list_results)
 
     render conn, "show.html", %{
       deck: deck, 

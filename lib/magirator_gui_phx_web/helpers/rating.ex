@@ -29,13 +29,4 @@ defmodule MagiratorGuiPhx.Helpers.Rating do
       pdist2: MagiratorCalculator.calculate_summary_pdist(summary, 2)
     }
   end
-
-  def collect_rating_data(results) do    
-    %{
-      pdiff: MagiratorCalculator.calculate_aggregate_pdiff(results),
-      pdiff3: MagiratorCalculator.calculate_aggregate_pdiff_cap(results, 3),
-      pdist2positive: MagiratorCalculator.calculate_aggregate_pdist_positive(results, 2),
-      pdist2: MagiratorCalculator.calculate_aggregate_pdist(results, 2)
-    }
-  end
 end
