@@ -1,5 +1,7 @@
 <div class='content'>
-  <h3 class="item-title">Rankings</h3> Show
+  <div>
+    <%= render(MagiratorGuiPhxWeb.RatingView, "rating.html", ratings: @ratings) %>
+  </div>
   <div>
     <%= render(MagiratorGuiPhxWeb.RatingView, "rating.html", ratings: @ratings) %>
   </div>
