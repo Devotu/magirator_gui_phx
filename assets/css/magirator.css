@@ -269,3 +269,29 @@ p.facts {
 .positive-backdrop {
   background-color: darkseagreen;
 }
+
+def tier(value) when value == -2, do: "bottom"
+def tier(value) when value == -1, do: "below"
+def tier(value) when value == 0, do: "mid"
+def tier(value) when value == 1, do: "above"
+def tier(value) when value == 2, do: "top"
+
+.bottom-backdrop {
+  background-color: #ec5f62;
+}
+
+.below-backdrop {
+  background-color:#fda64e;
+}
+
+.mid-backdrop {
+  background-color: #ffffe6;
+}
+
+.above-backdrop {
+  background-color:#a9da71;
+}
+
+.top-backdrop {
+  background-color: #67e48f;
+}

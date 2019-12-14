@@ -1,4 +1,4 @@
-<h3 class="item-title">Rankings</h3> Show
+<h3 class="item-title">Rankings</h3>
 <table id='ratingTable' data-sort-target='ratingTable' class="flat-table border">
   <thead>
     <tr>

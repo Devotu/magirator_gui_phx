@@ -3,7 +3,7 @@
     <%= render(MagiratorGuiPhxWeb.RatingView, "rating.html", ratings: @ratings) %>
   </div>
   <div>
-    <%= render(MagiratorGuiPhxWeb.RatingView, "rating.html", ratings: @ratings) %>
+    <%= render(MagiratorGuiPhxWeb.RatingView, "tiers.html", tiers: @tiers) %>
   </div>
 </div>
 <div class='menu'>

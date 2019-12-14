@@ -1,0 +1,11 @@
+<h3 class="list-title">Tiers</h3>
+
+<div class='list'>
+  <%= for tr <- @tiers do %>
+    <div class="list-item <%=DisplayHelper.tier(tr.result.tier)%>">
+      <p class="fact"><%= tr.deck.name %></p>
+      <p class="fact">Tier: <%= tr.result.tier %></p>
+      <p class="fact">Delta: <%= tr.result.delta %></p>
+    </div>
+  <% end %>
+</div>

@@ -31,4 +31,10 @@ defmodule MagiratorGuiPhx.Helpers.DisplayHelper do
   def wdlb(_) do 
     "neutral-backdrop"
   end
+
+  def tier(value) when value == -2, do: "bottom-backdrop"
+  def tier(value) when value == -1, do: "below-backdrop"
+  def tier(value) when value == 0, do: "mid-backdrop"
+  def tier(value) when value == 1, do: "above-backdrop"
+  def tier(value) when value == 2, do: "top-backdrop"
 end
