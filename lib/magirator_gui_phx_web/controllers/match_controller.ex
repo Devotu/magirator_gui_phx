@@ -78,7 +78,7 @@ defmodule MagiratorGuiPhxWeb.MatchController do
       atom_game.winner
       |> Integer.parse
 
-    {conclusion, conclusion_description} = draw_conclusion( winner_number )
+    {_conclusion, conclusion_description} = draw_conclusion( winner_number )
 
     game = %Game{creator_id: atom_game.player_one_id, conclusion: conclusion_description}
 
@@ -108,7 +108,7 @@ defmodule MagiratorGuiPhxWeb.MatchController do
   end
 
 
-  defp evaluate_place(participant, 0) do
+  defp evaluate_place(_participant, 0) do
     0
   end
 

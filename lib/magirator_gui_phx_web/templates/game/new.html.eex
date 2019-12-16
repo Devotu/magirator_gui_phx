@@ -1,5 +1,11 @@
 <div class='content'>
   <%= form_for @conn, game_path(@conn, :create), [as: :game], fn f -> %>
+  <h3 class="item-title">Tags</h3>
+  <div class='option-box'>
+    <div class='input-row'>
+      <%=label(f, :tier, "Tier")%> <%= checkbox(f, :tier, class: "input-check")%>    
+    </div>
+  </div>
   
   <%= render(ComponentView, "select_player.html", %{form: f, label: "Player", tag: :creator_id}) %>
   <%= render(ComponentView, "select_deck.html", form: :game, tag: :creator_deck_id) %>

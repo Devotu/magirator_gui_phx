@@ -3,6 +3,7 @@ defmodule MagiratorGuiPhxWeb.GameController do
   alias MagiratorStore.Structs.Game
   alias MagiratorStore.Structs.Result
   alias MagiratorStore.Helpers
+  alias MagiratorGuiPhx.Helpers.Tags
 
   def new(conn, _params) do
     render conn, "new.html"
@@ -10,8 +11,9 @@ defmodule MagiratorGuiPhxWeb.GameController do
 
   def create(conn, %{"game" => game_params}) do
     atom_game = Helpers.atomize_keys game_params
-
-    game = struct(Game, atom_game)
+    tags = Tags.collect_tags(atom_game)
+    game_data_with_tags = Map.put(atom_game, :tags, tags)
+    game = struct(Game, game_data_with_tags)
 
     {:ok, game_id} = MagiratorStore.create_game(game)
 
