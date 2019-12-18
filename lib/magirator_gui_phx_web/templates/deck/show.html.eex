@@ -1,5 +1,9 @@
 <div class='content'>
   <div>
+    <h3 class="item-title">Tier</h3>
+    <p class="fact">Tier: <%= @deck.tier %> Delta: <%= @deck.delta %>
+  </div>
+  <div>
     <%= render(MagiratorGuiPhxWeb.DeckView, "statistics.html", statistical_data: @statistical_data) %>
   </div>
   <div>
