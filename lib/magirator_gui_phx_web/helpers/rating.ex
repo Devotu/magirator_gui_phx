@@ -1,6 +1,6 @@
 defmodule MagiratorGuiPhx.Helpers.Rating do
 
-  def rate_all_result_summary(%{wins: wins, draws: draws, losses: losses} = summary) do
+  def rate_all_result_summary(%{wins: _wins, draws: _draws, losses: _losses} = summary) do
     %{
       pdiff: MagiratorCalculator.calculate_summary_pdiff(summary),
       pdiff3: MagiratorCalculator.calculate_summary_pdiff_cap(summary, 3),

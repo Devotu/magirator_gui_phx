@@ -35,3 +35,24 @@ function findOrderAndInvert(element) {
 function invertBooleanNumber(number) {
   return Math.pow((number - 1), 2)
 }
+
+
+Array.from(document.getElementsByClassName("restrict-tier")).forEach(e => 
+  e.addEventListener('click', () => 
+    {
+      restrictDecksToTierMatch(); 
+      restrictTags(); 
+    }, 
+    false
+  )
+);
+
+
+function restrictDecksToTierMatch(tier, decks) {
+  console.log(restrictDecksToTierMatch)
+}
+
+
+function restrictTags(deckOne, deckTwo) {
+  console.log(restrictTags)
+}

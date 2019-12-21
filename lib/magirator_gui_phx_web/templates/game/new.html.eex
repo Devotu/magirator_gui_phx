@@ -3,17 +3,17 @@
   <h3 class="item-title">Tags</h3>
   <div class='option-box'>
     <div class='input-row'>
-      <%=label(f, :tier, "Tier")%> <%= checkbox(f, :tier, class: "input-check")%>    
+      <%=label(f, :tier, "Tier")%> <%= checkbox(f, :tier, class: "input-check")%>    TODO only available if tiers match
     </div>
   </div>
   
   <%= render(ComponentView, "select_player.html", %{form: f, label: "Player", tag: :creator_id}) %>
-  <%= render(ComponentView, "select_deck.html", form: :game, tag: :creator_deck_id) %>
-
+  <%= render(ComponentView, "select_deck.html", form: :game, tag: :creator_deck_id, additional_class: " restrict-tier") %>
+  
   <div class="breaker">vs</div>
 
   <%= render(ComponentView, "select_player.html", %{form: f, label: "Player Opponent", tag: :opponent_id}) %>
-  <%= render(ComponentView, "select_deck.html", form: :game, tag: :opponent_deck_id) %>
+  <%= render(ComponentView, "select_deck.html", form: :game, tag: :opponent_deck_id, additional_class: " restrict-tier") %>
 
   <%= render(ComponentView, "input_label.html", %{label: "Conclusion"}) %>
   <%= render(ComponentView, "input_radio.html", %{form: f, label: "Victory", name: :conclusion, value: "victory"}) %>
@@ -29,6 +29,6 @@
 <div class='menu'>
   <%= render(ComponentView, "plaque.html", %{title: "+Game"}) %>
   <%= button("Main", to: main_path(@conn, :main), method: "get", class: "button border back-button") %>
-<%= button("New Match", to: match_path(@conn, :new), method: "get", class: "button border option-button") %>
-<%= button("New Game", to: game_path(@conn, :new), method: "get", class: "button border option-button") %>
+  <%= button("New Match", to: match_path(@conn, :new), method: "get", class: "button border option-button") %>
+  <%= button("New Game", to: game_path(@conn, :new), method: "get", class: "button border option-button") %>
 </div>

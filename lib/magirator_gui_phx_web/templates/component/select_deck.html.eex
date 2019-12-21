@@ -1,1 +1,1 @@
-<%= select_deck( assigns[:form], assigns[:tag]) %>
+<%= select_deck( assigns[:form], assigns[:tag], assigns[:additional_class]) %>
