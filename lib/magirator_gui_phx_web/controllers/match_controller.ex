@@ -5,6 +5,8 @@ defmodule MagiratorGuiPhxWeb.MatchController do
   alias MagiratorStore.Structs.Result
   alias MagiratorStore.Structs.Participant
   alias MagiratorGuiPhxWeb.Helpers.Helper, as: Helper
+  alias MagiratorGuiPhx.Helpers.Tags
+  alias MagiratorGuiPhx.Helpers.Tier
 
   def new(conn, _params) do
     render conn, "new.html"
@@ -13,9 +15,12 @@ defmodule MagiratorGuiPhxWeb.MatchController do
 
   def create(conn, %{"match" => match_params}) do
     atom_match = Helper.atomize_keys match_params
+    tags = Tags.collect_tags(atom_match)
+    IO.inspect(tags, label: "match tags")
 
     match = %Match{
-      creator_id: atom_match.player_one_id
+      creator_id: atom_match.player_one_id,
+      tags: tags
     }
 
     {:ok, match_id} = MagiratorStore.create_match(match)
@@ -62,13 +67,17 @@ defmodule MagiratorGuiPhxWeb.MatchController do
         match: match, game_results: game_results, 
         player_one: player_one, deck_one: deck_one,
         player_two: player_two, deck_two: deck_two,
-        players: [player_one, player_two]
+        players: [player_one, player_two],
       }
   end
 
 
   def add_game(conn, %{"game" => game_params}) do
     atom_game = Helper.atomize_keys game_params
+    tags = Tags.collect_tags(atom_game)
+    IO.inspect(game_params)
+    IO.inspect(atom_game)
+    IO.inspect(tags)
 
     {match_id, _} = 
       atom_game.match_id
@@ -80,7 +89,8 @@ defmodule MagiratorGuiPhxWeb.MatchController do
 
     {_conclusion, conclusion_description} = draw_conclusion( winner_number )
 
-    game = %Game{creator_id: atom_game.player_one_id, conclusion: conclusion_description}
+    game = %Game{creator_id: atom_game.player_one_id, conclusion: conclusion_description, tags: tags}
+    IO.inspect(game)
 
     {:ok, game_id} = MagiratorStore.create_game(game)
     {:ok} = MagiratorStore.add_game_to_match(game_id, match_id)
@@ -102,7 +112,9 @@ defmodule MagiratorGuiPhxWeb.MatchController do
       }
     
     {:ok, _opponent_result_id} = MagiratorStore.add_result(player_two_result)
-    
+
+    {:ok, _result} = Tier.resolve_tier_change(tags, player_one_result, player_two_result)
+
     conn
     |> redirect(to: match_path(conn, :show, match_id))
   end

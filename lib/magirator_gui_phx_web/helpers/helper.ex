@@ -17,6 +17,15 @@ defmodule MagiratorGuiPhxWeb.Helpers.Helper do
     |> Enum.into(%{})
   end
 
+  def atomize(terms) when is_list terms do
+    Enum.map(terms, &atomize/1)
+  end
+
+  def atomize(term) do
+    IO.inspect(term, label: "atomizing #{term}")
+    String.to_atom term 
+  end
+
 
   def expect_ok( {:ok, data} ) do
     data

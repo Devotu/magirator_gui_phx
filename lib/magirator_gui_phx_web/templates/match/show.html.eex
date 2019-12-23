@@ -37,6 +37,14 @@
     </div>
   </div>
 
+  <%= if(Tier.using_tier_i(@match.tags)) do %>
+    <div class='option-box'>
+      <div class='input-row'>
+        <%=label(f, :tier, "Tier")%> <%= checkbox(f, :tier, value: :true, disabled: :false, class: "input-check disabled") %>
+      </div>
+    </div>
+  <% end %>
+  
   <%= submit("Add", class: "button border do submit") %>
   <% end %>
 
@@ -47,7 +55,7 @@
           winner_name(game_result.results, @players)
         %>
       </li>
-    <%= end %>
+    <% end %>
   </ul>
 </div>
 <div class='menu'>

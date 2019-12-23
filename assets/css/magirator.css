@@ -156,6 +156,10 @@ body {
   box-sizing: border-box;
 }
 
+.do {
+  background-color: orange;
+}
+
 
 
 /* Table */
@@ -269,12 +273,6 @@ p.facts {
 .positive-backdrop {
   background-color: darkseagreen;
 }
-
-def tier(value) when value == -2, do: "bottom"
-def tier(value) when value == -1, do: "below"
-def tier(value) when value == 0, do: "mid"
-def tier(value) when value == 1, do: "above"
-def tier(value) when value == 2, do: "top"
 
 .bottom-backdrop {
   background-color: #ec5f62;
