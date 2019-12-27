@@ -1,0 +1,23 @@
+<div class='content'>
+  <%= form_for @conn, import_path(@conn, :import), [as: :import, class: "form"], fn f -> %>
+
+  <%= if assigns[:error] do %>
+    <p>Error: <%= assigns[:error] %>
+  <% end %>
+
+  <%= if assigns[:result] do %>
+    <p>Result: <%= assigns[:result] %>
+  <% end %>
+  
+  <%= render(ComponentView, "select_player.html", %{form: f, label: "Player", tag: :player_id}) %>
+  <%= render(ComponentView, "input_text.html", %{form: f, label: "data", name: :data}) %>
+  
+  <%= submit("Import", class: "button border do submit") %>
+  
+  <% end %>
+</div>
+
+<div class='menu'>
+  <%= render(ComponentView, "plaque.html", %{title: "Import"}) %>
+  <%= button("Main", to: main_path(@conn, :main), method: "get", class: "button border back-button") %>
+</div>

@@ -39,7 +39,7 @@ defmodule MagiratorGuiPhx.Mixfile do
       {:gettext, "~> 0.11"},
       {:plug_cowboy, "~> 1.0"},
       {:phoenix_ecto, "~> 4.0"},
-
+      {:poison, "~> 3.1"},
       {:bolt_sips, "~> 1.5"},
       {:ecto, "~> 3.0"},
       

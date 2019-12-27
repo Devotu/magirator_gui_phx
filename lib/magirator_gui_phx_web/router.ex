@@ -36,6 +36,9 @@ defmodule MagiratorGuiPhxWeb.Router do
     delete "/matches/:id/:caller_id/:caller", MatchController, :delete
 
     get "/ratings", RatingController, :index
+
+    get "/import", ImportController, :new
+    post "/import", ImportController, :import
   end
 
   scope "/", MagiratorGuiPhxWeb do
