@@ -4,7 +4,7 @@ defmodule MagiratorGuiPhxWeb.MatchController do
   alias MagiratorStore.Structs.Game
   alias MagiratorStore.Structs.Result
   alias MagiratorStore.Structs.Participant
-  alias MagiratorGuiPhxWeb.Helpers.Helper, as: Helper
+  alias MagiratorGuiPhxWeb.Helpers.Helper
   alias MagiratorGuiPhx.Helpers.Tags
   alias MagiratorGuiPhx.Helpers.Tier
 

@@ -35,6 +35,16 @@ defmodule MagiratorGuiPhxWeb.Helpers.Helper do
     :error
   end
 
+
+  def ok_result(nil) do
+    {:error, :invalid_result}
+  end
+
+  def ok_result(data) do
+    {:ok, data}
+  end
+
+
   def caller_as_atom(caller) do
     case caller do
       "deck" ->

@@ -1,5 +1,5 @@
 <div class='content'>
-  <%= form_for @conn, import_path(@conn, :import), [as: :import, class: "form"], fn f -> %>
+  <%= form_for @conn, import_path(@conn, :import), [as: :import_data, class: "form"], fn f -> %>
 
   <%= if assigns[:error] do %>
     <p>Error: <%= assigns[:error] %>
@@ -10,7 +10,7 @@
   <% end %>
   
   <%= render(ComponentView, "select_player.html", %{form: f, label: "Player", tag: :player_id}) %>
-  <%= render(ComponentView, "input_text.html", %{form: f, label: "data", name: :data}) %>
+  <%= render(ComponentView, "input_area.html", %{form: f, label: "Data", name: :data}) %>
   
   <%= submit("Import", class: "button border do submit") %>
   

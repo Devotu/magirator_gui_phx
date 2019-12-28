@@ -1,0 +1,4 @@
+<h3 class="item-title"><%=@label%></h3>
+<div class='option-box'>
+  <%= textarea(@form, @name, class: "input-row input-text border") %>
+</div>
