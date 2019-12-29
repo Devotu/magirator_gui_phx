@@ -3,6 +3,24 @@ defmodule DataImportTest do
 
   alias MagiratorGuiPhx.Logic.DataImport
 
+  test "import deck - success" do
+    {status, id} = DataImport.import_deck(%{
+      "black" => 0,
+      "blue" => 1,
+      "format" => "Block",
+      "green" => 0,
+      "name" => "Exile",
+      "player" => "Kent",
+      "red" => 0,
+      "white" => 1
+    }, 
+    11) #Player Erik
+
+    assert :ok == status
+    assert is_number id
+  end
+
+
   test "import decks - success with valid data" do
     decks = [
         %{
@@ -76,20 +94,33 @@ defmodule DataImportTest do
   end
 
 
-  test "import deck - success" do
-    {status, id} = DataImport.import_deck(%{
-      "black" => 0,
-      "blue" => 1,
-      "format" => "Block",
-      "green" => 0,
-      "name" => "Exile",
-      "player" => "Kent",
-      "red" => 0,
-      "white" => 1
-    }, 
-    11) #Player Erik
+
+
+  test "import result - success" do
+    {status, id} = DataImport.import_result(
+      %{"d1" => "Drown in Filth", "d2" => "Exile", "w1" => 0, "w2" => 2
+      }, 
+      11) #Player Erik
 
     assert :ok == status
     assert is_number id
+  end
+
+  
+  test "import results - success with valid data" do
+    results = [
+        %{"d1" => "Topplegeist", "d2" => "Phase 2", "w1" => 2, "w2" => 0},
+        %{"d1" => "Topplegeist", "d2" => "Exile", "w1" => 0, "w2" => 1}
+      ]
+
+    {status, result_id_list} = DataImport.import_results(results, 12) #Player Filip
+    assert :ok == status
+    assert is_number List.first(result_id_list)
+  end
+
+  test "import results - success with nil" do
+    {status, result_id_list} = DataImport.import_results(nil, 12) #Player Filip
+    assert :ok == status
+    assert Enum.empty? result_id_list
   end
 end
