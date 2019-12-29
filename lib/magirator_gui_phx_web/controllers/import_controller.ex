@@ -40,12 +40,12 @@ defmodule MagiratorGuiPhxWeb.ImportController do
     {:ok, deck_id_list} = DataImport.import_decks(map_decks, player_id)
     IO.inspect(deck_id_list, label: "imported decks")
 
-    map_results = map_data["results"]
-    IO.inspect(map_results, label: "map results")
-    {:ok, result_id_list} = {:ok, [10005,2,4]} #DataImport.import_results(map_results, player_id)
-    IO.inspect(deck_id_list, label: "imported results")
+    map_games = map_data["games"]
+    IO.inspect(map_games, label: "map games")
+    {:ok, game_id_list} = DataImport.import_games(map_games, player_id)
+    IO.inspect(deck_id_list, label: "imported games")
 
-    redirect(conn, to: import_path(conn, :new, result: "imported decks: #{Kernel.inspect(deck_id_list)} and results: #{result_id_list}"))
+    redirect(conn, to: import_path(conn, :new, result: "imported decks: #{Kernel.inspect(deck_id_list)} and games: #{game_id_list}"))
   end
 
   defp display_error(conn, msg) do

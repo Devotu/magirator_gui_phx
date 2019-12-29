@@ -3,6 +3,7 @@ defmodule DataImportTest do
 
   alias MagiratorGuiPhx.Logic.DataImport
 
+  @tag deck: true
   test "import deck - success" do
     {status, id} = DataImport.import_deck(%{
       "black" => 0,
@@ -21,6 +22,7 @@ defmodule DataImportTest do
   end
 
 
+  @tag deck: true
   test "import decks - success with valid data" do
     decks = [
         %{
@@ -70,12 +72,14 @@ defmodule DataImportTest do
     assert is_number List.first(deck_id_list)
   end
 
+  @tag deck: true
   test "import decks - success with nil" do
     {status, deck_id_list} = DataImport.import_decks(nil, 12) #Player Filip
     assert :ok == status
     assert Enum.empty? deck_id_list
   end
 
+  @tag deck: true
   test "import decks - failure" do
     single_deck_object = %{
           "black" => 1,
@@ -95,32 +99,39 @@ defmodule DataImportTest do
 
 
 
-
-  test "import result - success" do
-    {status, id} = DataImport.import_result(
-      %{"d1" => "Drown in Filth", "d2" => "Exile", "w1" => 0, "w2" => 2
+  @tag game: true
+  test "import game - success" do
+    {status, id} = DataImport.import_game(
+      %{"d1" => "Deck 1", "d2" => "Deck 4", "p1" => 2, "p2" => 1
       }, 
-      11) #Player Erik
+      %{
+        "Deck 4" => {23, 11}, #Player "Erik"
+        "Deck 1" => {20, 10}, #Player "Erlango"
+        "Deck 3" => {22, 11}  #Player "Erik"
+      }
+    )
 
     assert :ok == status
     assert is_number id
   end
 
   
-  test "import results - success with valid data" do
-    results = [
+  # @tag game: true
+  test "import games - success with valid data" do
+    games = [
         %{"d1" => "Topplegeist", "d2" => "Phase 2", "w1" => 2, "w2" => 0},
         %{"d1" => "Topplegeist", "d2" => "Exile", "w1" => 0, "w2" => 1}
       ]
 
-    {status, result_id_list} = DataImport.import_results(results, 12) #Player Filip
+    {status, game_id_list} = DataImport.import_games(games, 12) #Player Filip
     assert :ok == status
-    assert is_number List.first(result_id_list)
+    assert is_number List.first(game_id_list)
   end
 
-  test "import results - success with nil" do
-    {status, result_id_list} = DataImport.import_results(nil, 12) #Player Filip
+  # @tag game: true
+  test "import games - success with nil" do
+    {status, game_id_list} = DataImport.import_games(nil, 12) #Player Filip
     assert :ok == status
-    assert Enum.empty? result_id_list
+    assert Enum.empty? game_id_list
   end
 end
