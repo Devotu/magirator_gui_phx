@@ -99,7 +99,7 @@ defmodule DataImportTest do
 
 
 
-  @tag game: true
+  # @tag game: true
   test "import game - success" do
     {status, id} = DataImport.import_game(
       %{"d1" => "Deck 1", "d2" => "Deck 4", "p1" => 2, "p2" => 1
@@ -116,11 +116,11 @@ defmodule DataImportTest do
   end
 
   
-  # @tag game: true
+  @tag game: true
   test "import games - success with valid data" do
     games = [
-        %{"d1" => "Topplegeist", "d2" => "Phase 2", "w1" => 2, "w2" => 0},
-        %{"d1" => "Topplegeist", "d2" => "Exile", "w1" => 0, "w2" => 1}
+        %{"d1" => "Deck 1", "d2" => "Deck 2", "w1" => 2, "w2" => 0},
+        %{"d1" => "Deck 1", "d2" => "Deck 3", "w1" => 0, "w2" => 1}
       ]
 
     {status, game_id_list} = DataImport.import_games(games, 12) #Player Filip
@@ -128,7 +128,7 @@ defmodule DataImportTest do
     assert is_number List.first(game_id_list)
   end
 
-  # @tag game: true
+  @tag game: true
   test "import games - success with nil" do
     {status, game_id_list} = DataImport.import_games(nil, 12) #Player Filip
     assert :ok == status

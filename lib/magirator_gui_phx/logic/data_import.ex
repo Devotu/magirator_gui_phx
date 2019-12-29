@@ -89,6 +89,23 @@ defmodule MagiratorGuiPhx.Logic.DataImport do #Data to avoid conflicts with rese
     {:error, :invalid_data}
   end
 
+
+  def import_decks(games, player_id) when is_list games do
+    games 
+    # |> Enum.map(fn(d) -> import_game(d, player_id) end)
+    # |> Enum.reduce([], fn({:ok, game_id}, acc) -> acc ++ [game_id] end)
+    # |> Helper.ok_result()
+  end
+
+  def import_games(nil, _player_id) do
+    {:ok,[]}
+  end
+
+  def import_games(data, _player_id) do
+    IO.inspect(data, label: "import games invalid data #{Kernel.inspect(data)}")
+    {:error, :invalid_data}
+  end
+
   defp num_to_bool(1), do: :true
   defp num_to_bool(0), do: :false
   defp num_to_bool(nil), do: :false
