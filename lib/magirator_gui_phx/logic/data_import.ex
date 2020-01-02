@@ -90,22 +90,54 @@ defmodule MagiratorGuiPhx.Logic.DataImport do #Data to avoid conflicts with rese
   end
 
 
-  def import_decks(games, player_id) when is_list games do
+  def import_games(deck_game_summaries, player_id) when is_list deck_game_summaries do
+
+    games = 
+    deck_game_summaries
+    |> Enum.reduce([], fn(dgs, acc)-> split_result_summary_to_games(dgs) ++ acc end)
+
+    deck_lookup = create_deck_lookup(deck_game_summaries)
+
     games 
-    # |> Enum.map(fn(d) -> import_game(d, player_id) end)
-    # |> Enum.reduce([], fn({:ok, game_id}, acc) -> acc ++ [game_id] end)
-    # |> Helper.ok_result()
+    |> Enum.map(fn(g) -> import_game(g, deck_lookup) end)
+    |> Enum.reduce([], fn({:ok, game_id}, acc) -> acc ++ [game_id] end)
+    |> Helper.ok_result()
   end
 
-  def import_games(nil, _player_id) do
+  def import_games(nil) do
     {:ok,[]}
   end
 
   def import_games(data, _player_id) do
-    IO.inspect(data, label: "import games invalid data #{Kernel.inspect(data)}")
+    IO.inspect(data, label: "import games invalid data")
     {:error, :invalid_data}
   end
 
+
+  ## Helpers ##
+  defp split_result_summary_to_games(sumarized_result_data) do
+    split_games = disperse_games(sumarized_result_data)
+    IO.inspect(split_games, label: "split games")
+  end
+
+  defp disperse_games(%{"d1" => deck_one, "d2" => deck_two, "w1" => w1, "w2" => w2}) do #one
+    wingames = []
+    wingames = wingames ++ disperse_wins(Enum.to_list(1..w1), {deck_one, deck_two})
+    wingames = wingames ++ disperse_wins(Enum.to_list(1..w2), {deck_two, deck_one})
+    IO.inspect(wingames)
+  end
+  
+  defp disperse_wins([], _decks) do
+    []
+  end
+
+  defp disperse_wins([_h|t], {_deck_win, _deck_loss} = decks) do
+    [win_to_game(decks) | disperse_wins(t, decks)]
+  end
+
+  defp win_to_game({deck_win, deck_loss}) do
+    %{"d1" => deck_win, "d2" => deck_loss, "p1" => 1, "p2" => 2}
+  end
   defp num_to_bool(1), do: :true
   defp num_to_bool(0), do: :false
   defp num_to_bool(nil), do: :false
