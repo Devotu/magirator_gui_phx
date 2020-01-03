@@ -115,16 +115,8 @@ defmodule MagiratorGuiPhx.Logic.DataImport do #Data to avoid conflicts with rese
 
 
   ## Helpers ##
-  defp split_result_summary_to_games(sumarized_result_data) do
-    split_games = disperse_games(sumarized_result_data)
-  end
-
-  defp disperse_games(%{"d1" => deck_one, "d2" => deck_two, "w1" => w1, "w2" => w2}) do #one
-    games = []
-    games1 = disperse_wins(w1, deck_one, deck_two)
-    games = games ++ games1
-    games2 = disperse_wins(w2, deck_two, deck_one)
-    games = games ++ games2
+  defp split_result_summary_to_games(%{"d1" => deck_one, "d2" => deck_two, "w1" => w1, "w2" => w2}) do #one
+    disperse_wins(w1, deck_one, deck_two) ++ disperse_wins(w2, deck_two, deck_one)
   end
 
 
