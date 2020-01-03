@@ -117,27 +117,52 @@ defmodule MagiratorGuiPhx.Logic.DataImport do #Data to avoid conflicts with rese
   ## Helpers ##
   defp split_result_summary_to_games(sumarized_result_data) do
     split_games = disperse_games(sumarized_result_data)
-    IO.inspect(split_games, label: "split games")
   end
 
   defp disperse_games(%{"d1" => deck_one, "d2" => deck_two, "w1" => w1, "w2" => w2}) do #one
-    wingames = []
-    wingames = wingames ++ disperse_wins(Enum.to_list(1..w1), {deck_one, deck_two})
-    wingames = wingames ++ disperse_wins(Enum.to_list(1..w2), {deck_two, deck_one})
-    IO.inspect(wingames)
+    games = []
+    games1 = disperse_wins(w1, deck_one, deck_two)
+    games = games ++ games1
+    games2 = disperse_wins(w2, deck_two, deck_one)
+    games = games ++ games2
   end
-  
-  defp disperse_wins([], _decks) do
+
+
+  defp disperse_wins(0, deck_win, deck_loss) do
     []
   end
 
-  defp disperse_wins([_h|t], {_deck_win, _deck_loss} = decks) do
-    [win_to_game(decks) | disperse_wins(t, decks)]
+  defp disperse_wins(1, deck_win, deck_loss) do
+    [%{"d1" => deck_win, "d2" => deck_loss, "p1" => 1, "p2" => 2}]
   end
 
-  defp win_to_game({deck_win, deck_loss}) do
-    %{"d1" => deck_win, "d2" => deck_loss, "p1" => 1, "p2" => 2}
+  defp disperse_wins(w, deck_win, deck_loss) do
+    for n <- (w-1)..0, do: %{"d1" => deck_win, "d2" => deck_loss, "p1" => 1, "p2" => 2}
   end
+
+
+  defp create_deck_lookup(result_data) do
+    #Map present decks (and thus remove duplicates)
+    decks_present = 
+    result_data
+    |> Enum.map(fn(r)->[r["d1"], r["d2"]] end)
+    |> Enum.concat()
+    |> Enum.uniq()
+    
+    #Get list of decks
+    {:ok, decks} = MagiratorStore.list_decks()
+
+    #Match with decks present
+    #Find creating players
+    #Merge to lookup
+    present_deck_data = decks_present
+    |> Enum.map(fn(pd)-> Enum.find(decks, &(&1.name == pd)) end)
+    |> Enum.map(fn(d)-> {d, MagiratorStore.get_deck_creator(d.id)} end)
+    |> Enum.map(fn({d,{:ok, p}})-> {d,p} end) 
+    |> Enum.reduce(%{}, fn({d, p}, acc)-> Map.put(acc, d.name, {d.id, p.id}) end)
+  end
+
+
   defp num_to_bool(1), do: :true
   defp num_to_bool(0), do: :false
   defp num_to_bool(nil), do: :false
