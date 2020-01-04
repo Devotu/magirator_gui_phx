@@ -25,8 +25,7 @@ defmodule MagiratorGuiPhxWeb.RatingController do
       |> Enum.concat()
       |> MagiratorCalculator.trace_tier()
       |> Enum.map( fn({deck_id, result}) -> merge_with_deck(deck_id, result, decks) end)
-
-    IO.puts(Kernel.inspect(tiers))
+      |> Enum.sort( &(&1.result.tier > &2.result.tier))
 
     render conn, "show.html", ratings: ratings, tiers: tiers
   end
@@ -49,9 +48,4 @@ defmodule MagiratorGuiPhxWeb.RatingController do
       result: result
     }
   end
-
-  # {{"Deck 3", 22}, [%{game_id: 40, match_id: 0, opponent_deck_id: 20, opponent_deck_name: "Deck 1", opponent_name: "Erlango", place: 2}]}
-
-            #  40                22               2                 20               !2->1
-  #%{game_id: 1, deck_id_first: 1, place_first: 1, deck_id_second: 2, place_second: 2}   # +1  0: -1  0:  0  0:  0  0:  0  0:  0  0
 end
