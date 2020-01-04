@@ -120,7 +120,7 @@ defmodule MagiratorGuiPhx.Logic.DataImport do #Data to avoid conflicts with rese
   end
 
 
-  defp disperse_wins(0, deck_win, deck_loss) do
+  defp disperse_wins(0, _deck_win, _deck_loss) do
     []
   end
 
@@ -129,7 +129,7 @@ defmodule MagiratorGuiPhx.Logic.DataImport do #Data to avoid conflicts with rese
   end
 
   defp disperse_wins(w, deck_win, deck_loss) do
-    for n <- (w-1)..0, do: %{"d1" => deck_win, "d2" => deck_loss, "p1" => 1, "p2" => 2}
+    for _n <- (w-1)..0, do: %{"d1" => deck_win, "d2" => deck_loss, "p1" => 1, "p2" => 2}
   end
 
 
@@ -147,7 +147,7 @@ defmodule MagiratorGuiPhx.Logic.DataImport do #Data to avoid conflicts with rese
     #Match with decks present
     #Find creating players
     #Merge to lookup
-    present_deck_data = decks_present
+    decks_present
     |> Enum.map(fn(pd)-> Enum.find(decks, &(&1.name == pd)) end)
     |> Enum.map(fn(d)-> {d, MagiratorStore.get_deck_creator(d.id)} end)
     |> Enum.map(fn({d,{:ok, p}})-> {d,p} end) 
