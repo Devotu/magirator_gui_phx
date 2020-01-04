@@ -104,7 +104,7 @@ defmodule MagiratorGuiPhx.Logic.DataImport do #Data to avoid conflicts with rese
     |> Helper.ok_result()
   end
 
-  def import_games(nil) do
+  def import_games(nil, _player_id) do
     {:ok,[]}
   end
 
@@ -135,25 +135,38 @@ defmodule MagiratorGuiPhx.Logic.DataImport do #Data to avoid conflicts with rese
 
   defp create_deck_lookup(result_data) do
     #Map present decks (and thus remove duplicates)
-    decks_present = 
+    deck_names_present = 
     result_data
     |> Enum.map(fn(r)->[r["d1"], r["d2"]] end)
     |> Enum.concat()
     |> Enum.uniq()
+
     
     #Get list of decks
     {:ok, decks} = MagiratorStore.list_decks()
 
+    IO.inspect(deck_names_present, label: "deck_names_present")
+    IO.inspect(Enum.map(decks, fn(d)-> d.name end), label: "decks")
+
     #Match with decks present
     #Find creating players
     #Merge to lookup
-    decks_present
-    |> Enum.map(fn(pd)-> Enum.find(decks, &(&1.name == pd)) end)
+    deck_names_present
+    |> Enum.map(fn(n)-> match_deck(decks, n) end)
     |> Enum.map(fn(d)-> {d, MagiratorStore.get_deck_creator(d.id)} end)
     |> Enum.map(fn({d,{:ok, p}})-> {d,p} end) 
     |> Enum.reduce(%{}, fn({d, p}, acc)-> Map.put(acc, d.name, {d.id, p.id}) end)
   end
 
+  defp match_deck(decks, name) do
+    deck = Enum.find(decks, &(&1.name == name))
+    case deck do
+      nil ->
+        IO.inspect("Could not find deck #{name}")
+        name
+      _ -> deck
+    end    
+  end
 
   defp num_to_bool(1), do: :true
   defp num_to_bool(0), do: :false
