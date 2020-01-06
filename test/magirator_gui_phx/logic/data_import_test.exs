@@ -128,6 +128,22 @@ defmodule DataImportTest do
     assert is_number List.first(game_id_list)
     assert 8 == Enum.count(game_id_list)
   end
+  
+  @tag game: true
+  test "import games - success with valid tags" do
+    games = [
+        %{"d1" => "Deck 1", "d2" => "Deck 2", "w1" => 4, "w2" => 1, "tags" => "TIER, ARENA"},
+        %{"d1" => "Deck 1", "d2" => "Deck 3", "w1" => 1, "w2" => 2, "tags" => "TIER"}
+      ]
+
+    {status, game_id_list} = DataImport.import_games(games, 12) #Player Filip
+    IO.inspect(game_id_list)
+    assert :ok == status
+    assert is_number List.first(game_id_list)
+    assert 8 == Enum.count(game_id_list)
+    assert ["TIER", "ARENA"] == MagiratorStore.get_game(List.first(game_id_list))
+    assert ["TIER"] == MagiratorStore.get_game(List.last(game_id_list))
+  end
 
   @tag game: true
   test "import games - success with nil" do
