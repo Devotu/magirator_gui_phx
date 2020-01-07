@@ -14,7 +14,7 @@ defmodule MagiratorGuiPhxWeb.PlayerController do
     |> String.downcase
 
     {:ok, user_id} = MagiratorStore.create_user(atom_player.email, hashword)
-    {:ok, player_id} = MagiratorStore.create_player(atom_player.name, user_id)
+    {:ok, _player_id} = MagiratorStore.create_player(atom_player.name, user_id)
 
     conn
     |> redirect(to: main_path(conn, :main))

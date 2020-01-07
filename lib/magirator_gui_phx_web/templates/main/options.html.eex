@@ -4,4 +4,5 @@
 <%= button("New Match", to: match_path(@conn, :new), method: "get", class: "button border option-button") %>
 <%= button("New Game", to: game_path(@conn, :new), method: "get", class: "button border option-button") %>
 <%= button("Ratings", to: rating_path(@conn, :index), method: "get", class: "button border option-button") %>
+<%= button("Tiers", to: tier_path(@conn, :index), method: "get", class: "button border option-button") %>
 <%= button("Import", to: import_path(@conn, :new), method: "get", class: "button border option-button") %>

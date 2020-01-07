@@ -37,6 +37,8 @@ defmodule MagiratorGuiPhxWeb.Router do
 
     get "/ratings", RatingController, :index
 
+    get "/tier", TierController, :index
+
     get "/import", ImportController, :new
     post "/import", ImportController, :import
   end
