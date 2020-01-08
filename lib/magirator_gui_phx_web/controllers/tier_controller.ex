@@ -7,9 +7,9 @@ defmodule MagiratorGuiPhxWeb.TierController do
   def index(conn, _params) do
     {:ok, decks} = MagiratorStore.list_decks()
 
-    tiers = Helper.clock("Tiers", &build_tiers/1, [decks])
+    tiers = Helper.clock([decks], &build_tiers/1, "Tiers")
 
-    render conn, "show.html", tiers: tiers
+    render conn, "show.html", [actual_tiers: tiers, calculated_tiers: tiers]
   end
 
   def build_tiers(decks) do
@@ -19,7 +19,7 @@ defmodule MagiratorGuiPhxWeb.TierController do
     |> Enum.filter( fn({_deck, results}) -> !Enum.empty? results end)
     |> Enum.map( fn({deck, results}) -> convert_to_tier_results(deck, results) end)
     |> Enum.concat()
-    |> MagiratorCalculator.trace_tier()
+    |> Helper.pipe_clock(&MagiratorCalculator.trace_tier/1, "Trace")
     |> Enum.map( fn({deck_id, result}) -> merge_with_deck(deck_id, result, decks) end)
     |> Enum.sort( &(&1.result.tier > &2.result.tier))
   end

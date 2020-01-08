@@ -1,4 +1,4 @@
-defmodule CollectionTest do
+defmodule CollectionHelperTest do
   use ExUnit.Case
 
   alias MagiratorGuiPhx.Helpers.Collection

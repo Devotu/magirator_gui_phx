@@ -58,8 +58,15 @@ defmodule MagiratorGuiPhxWeb.Helpers.Helper do
     microseconds/1000
   end
 
-  def clock(mark, fun, args) do
+  def clock(args, fun, mark) do
     {time, result} = :timer.tc(fun, args)
+    ms_time = mics_to_ms(time)
+    IO.puts(mark <> ": #{ms_time} ms")
+    result
+  end
+
+  def pipe_clock(args, fun, mark) do
+    {time, result} = :timer.tc(fun, [args])
     ms_time = mics_to_ms(time)
     IO.puts(mark <> ": #{ms_time} ms")
     result

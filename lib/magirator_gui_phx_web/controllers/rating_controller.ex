@@ -7,7 +7,7 @@ defmodule MagiratorGuiPhxWeb.RatingController do
   def index(conn, _params) do
     {:ok, decks} = MagiratorStore.list_decks()
 
-    ratings = Helper.clock("Ratings", &build_ratings/1, [decks])
+    ratings = Helper.clock([decks], &build_ratings/1, "Ratings")
 
     render conn, "show.html", ratings: ratings
   end
