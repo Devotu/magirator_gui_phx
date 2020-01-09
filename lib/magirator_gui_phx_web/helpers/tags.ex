@@ -10,14 +10,16 @@ defmodule MagiratorGuiPhx.Helpers.Tags do
   defp tier(%{tier: "false"}), do: []
   defp tier(_), do: []
 
-
+  def convert_tags(nil), do: []
   def convert_tags(data) when is_bitstring data do
     data
     |> split_tags()
+    |> Enum.map(&String.trim/1)
     |> Enum.map(&convert_tag/1)
     |> list_tag()
     |> Enum.concat()
   end
+  def convert_tags(_data), do: []
 
 
   defp split_tags(data) when is_bitstring data do 

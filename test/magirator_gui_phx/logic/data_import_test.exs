@@ -108,7 +108,8 @@ defmodule DataImportTest do
         "Deck 4" => {23, 11}, #Player "Erik"
         "Deck 1" => {20, 10}, #Player "Erlango"
         "Deck 3" => {22, 11}  #Player "Erik"
-      }
+      },
+      11
     )
 
     assert :ok == status
@@ -124,7 +125,8 @@ defmodule DataImportTest do
         "Deck 4" => {23, 11}, #Player "Erik"
         "Deck 1" => {20, 10}, #Player "Erlango"
         "Deck 3" => {22, 11}  #Player "Erik"
-      }
+      },
+      10
     )
 
     assert :ok == status
@@ -160,8 +162,11 @@ defmodule DataImportTest do
     assert :ok == status
     assert is_number List.first(game_id_list)
     assert 8 == Enum.count(game_id_list)
-    assert ["TIER", "ARENA"] == MagiratorStore.get_game(List.first(game_id_list)).tags
-    assert ["TIER"] == MagiratorStore.get_game(List.last(game_id_list)).tags
+
+    {:ok, first_game} = MagiratorStore.get_game(List.first(game_id_list))
+    assert ["TIER"] == first_game.tags
+    {:ok, last_game} = MagiratorStore.get_game(List.last(game_id_list))
+    assert ["TIER", "ARENA"] == last_game.tags
   end
 
   @tag game: true
