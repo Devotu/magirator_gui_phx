@@ -1,6 +1,9 @@
 <div class='content'>
   <div>
-    <%= render(MagiratorGuiPhxWeb.TierView, "tiers.html", tiers: @tiers) %>
+    <%= render(MagiratorGuiPhxWeb.TierView, "tiers.html", tiers: @actual_tiers) %>
+  </div>
+  <div>
+    <%= render(MagiratorGuiPhxWeb.TierView, "tiers.html", tiers: @calculated_tiers) %>
   </div>
 </div>
 <div class='menu'>

@@ -115,6 +115,25 @@ defmodule DataImportTest do
     assert is_number id
   end
 
+
+  # @tag game: true
+  test "import game - success with tags" do
+    {status, id} = DataImport.import_game(
+      %{"d1" => "Deck 1", "d2" => "Deck 4", "p1" => 2, "p2" => 1, "tags" => "TIER,ARENA"}, 
+      %{
+        "Deck 4" => {23, 11}, #Player "Erik"
+        "Deck 1" => {20, 10}, #Player "Erlango"
+        "Deck 3" => {22, 11}  #Player "Erik"
+      }
+    )
+
+    assert :ok == status
+    assert is_number id
+
+    {:ok, game} = MagiratorStore.get_game(id)
+    assert ["TIER", "ARENA"] == game.tags
+  end
+
   
   @tag game: true
   test "import games - success with valid data" do
@@ -141,8 +160,8 @@ defmodule DataImportTest do
     assert :ok == status
     assert is_number List.first(game_id_list)
     assert 8 == Enum.count(game_id_list)
-    assert ["TIER", "ARENA"] == MagiratorStore.get_game(List.first(game_id_list))
-    assert ["TIER"] == MagiratorStore.get_game(List.last(game_id_list))
+    assert ["TIER", "ARENA"] == MagiratorStore.get_game(List.first(game_id_list)).tags
+    assert ["TIER"] == MagiratorStore.get_game(List.last(game_id_list)).tags
   end
 
   @tag game: true

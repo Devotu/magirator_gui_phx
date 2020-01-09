@@ -4,6 +4,7 @@ defmodule MagiratorGuiPhx.Logic.DataImport do #Data to avoid conflicts with rese
   alias MagiratorStore.Structs.Game
   alias MagiratorGuiPhxWeb.Helpers.Helper
   alias MagiratorGuiPhx.Helpers.Tier
+  alias MagiratorGuiPhx.Helpers.Tags
 
   def import_decks(decks, player_id) when is_list decks do
     decks 
@@ -46,7 +47,8 @@ defmodule MagiratorGuiPhx.Logic.DataImport do #Data to avoid conflicts with rese
 
   def import_game(game_data, deck_lookup) when is_map game_data do
 
-    tags = find_tags(game_data["tags"])
+    tags = find_tags(game_data)
+    IO.inspect(tags, label: "Tags imported")
 
     {d1, p1} = deck_lookup[game_data["d1"]]
 
@@ -78,6 +80,7 @@ defmodule MagiratorGuiPhx.Logic.DataImport do #Data to avoid conflicts with rese
       }
 
     {:ok, _second_result_id} = MagiratorStore.add_result(second_result)
+
 
     {:ok, _result} = Tier.resolve_tier_change(tags, first_result, second_result)
     
@@ -173,8 +176,8 @@ defmodule MagiratorGuiPhx.Logic.DataImport do #Data to avoid conflicts with rese
   defp num_to_bool(nil), do: :false
 
   defp find_tags(nil), do: []
-  defp find_tags(tag_data) when is_list tag_data do 
-    String.split(tag_data, ",")
+  defp find_tags(%{"tags" => tags}) do
+    Tags.convert_tags(tags)
   end
-  defp find_tags(_tag_data), do: []
+  defp find_tags(_data), do: []
 end

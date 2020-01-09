@@ -14,9 +14,18 @@ defmodule MagiratorGuiPhx.Helpers.Tier do
     {:ok, :changed}
   end
 
+  def resolve_tier_change([:tier|_t], result_one, result_two) do
+    resolve_tier_change([:tier], result_one, result_two)
+  end
+
+  def resolve_tier_change([_h|t], result_one, result_two) do
+    resolve_tier_change(t, result_one, result_two)
+  end
+
   def resolve_tier_change([], _result_one, _result_two) do
     {:ok, :not_requested}
   end
+  
 
   def using_tier_i(taglist) do
     IO.inspect(using_tier(taglist), label: "using tier")
