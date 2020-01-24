@@ -5,27 +5,34 @@ defmodule MagiratorGuiPhxWeb.TierController do
   alias MagiratorGuiPhxWeb.Helpers.Helper
 
   def index(conn, _params) do
-    {:ok, decks} = MagiratorStore.list_decks()
 
-    calculated_tiers = Helper.clock([decks], &build_tiers/1, "Tiers")
+    {:ok, all_decks} = MagiratorStore.list_decks()
+    all_results = collect_all_results(all_decks)
+    calculated_tiers = Helper.clock([all_results, all_decks], &build_tiers/2, "Tiers")
 
-    {:ok, decks} = MagiratorStore.list_decks()
 
     actual_tiers = 
-    decks
+    all_decks
     |> Enum.map(fn(d)-> %{deck: d, result: %{tier: d.tier, delta: d.delta}} end)
     |> Enum.sort( &(&1.result.tier > &2.result.tier))
 
-    render conn, "show.html", [actual_tiers: actual_tiers, calculated_tiers: calculated_tiers]
+    render conn, "show.html", [
+      actual_tiers: actual_tiers, 
+      calculated_tiers: calculated_tiers,
+      ]
   end
 
-  def build_tiers(decks) do
+  def collect_all_results(decks) do
     decks
     |> Enum.map( fn(deck) -> {deck, MagiratorQuery.list_deck_results(deck.id)} end)
     |> Enum.map( fn({deck, {:ok, results}}) -> {deck, results} end)  
     |> Enum.filter( fn({_deck, results}) -> !Enum.empty? results end)
     |> Enum.map( fn({deck, results}) -> convert_to_tier_results(deck, results) end)
     |> Enum.concat()
+  end
+
+  def build_tiers(results, decks) do
+    results
     |> Helper.pipe_clock(&MagiratorCalculator.trace_tier/1, "Trace")
     |> Enum.map( fn({deck_id, result}) -> merge_with_deck(deck_id, result, decks) end)
     |> Enum.sort( &(&1.result.tier > &2.result.tier))
