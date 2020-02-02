@@ -5,4 +5,5 @@
 <%= button("New Game", to: game_path(@conn, :new), method: "get", class: "button border option-button") %>
 <%= button("Rankings", to: rating_path(@conn, :index), method: "get", class: "button border option-button") %>
 <%= button("Tiers", to: tier_path(@conn, :index), method: "get", class: "button border option-button") %>
+<%= button("Stats", to: statistics_path(@conn, :index), method: "get", class: "button border option-button") %>
 <%= button("Import", to: import_path(@conn, :new), method: "get", class: "button border option-button") %>

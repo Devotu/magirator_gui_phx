@@ -293,3 +293,27 @@ p.facts {
 .top-backdrop {
   background-color: #67e48f;
 }
+
+.black {
+  background-color: darkslategrey;
+}
+
+.white {
+  background-color: white;
+}
+
+.red {
+  background-color: tomato;
+}
+
+.green {
+  background-color: lightgreen;
+}
+
+.blue {
+  background-color: lightblue;
+}
+
+. {
+  background-color: lightgrey;
+}

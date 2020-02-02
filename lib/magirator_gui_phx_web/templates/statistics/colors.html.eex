@@ -1,0 +1,10 @@
+<h3 class="list-title"><%= @label %></h3>
+
+<div class='list'>
+  <%= for c <- @colors_count do %>
+    <div class="list-item <%=DisplayHelper.color(c.name)%>">
+      <p class="fact"><%= c.name %></p>
+      <p class="fact"><%= c.count %></p>
+    </div>
+  <% end %>
+</div>
