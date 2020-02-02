@@ -3,10 +3,19 @@
     <%= render(MagiratorGuiPhxWeb.TierView, "tiers.html", tiers: @actual_tiers, label: "Actual") %>
   </div>
   <div>
-    <%= render(MagiratorGuiPhxWeb.TierView, "tiers.html", tiers: @calculated_tiers, label: "Calculated") %>
+    <%= render(MagiratorGuiPhxWeb.TierView, "tiers.html", tiers: @calculated_tiers, label: "Calculated in appearing sequence") %>
+  </div>
+  <div>
+    <%= render(MagiratorGuiPhxWeb.TierView, "tiers.html", tiers: @calculated_tiers_1, label: "Calculated random 1:st run") %>
+  </div>
+  <div>
+    <%= render(MagiratorGuiPhxWeb.TierView, "tiers.html", tiers: @calculated_tiers_2, label: "Calculated random 1:nd run") %>
+  </div>
+  <div>
+    <%= render(MagiratorGuiPhxWeb.TierView, "tiers.html", tiers: @calculated_tiers_3, label: "Calculated random 3:rd run") %>
   </div>
 </div>
 <div class='menu'>
-  <%= render(ComponentView, "plaque.html", %{title: "Ranking"}) %>
+  <%= render(ComponentView, "plaque.html", %{title: "Tier"}) %>
   <%= button("Main", to: main_path(@conn, :main), method: "get", class: "button border option-button") %>
 </div>

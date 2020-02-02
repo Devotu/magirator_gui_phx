@@ -1,7 +1,5 @@
 defmodule MagiratorGuiPhxWeb.TierController do
   use MagiratorGuiPhxWeb, :controller
-  alias MagiratorGuiPhx.Helpers.Statistics
-  alias MagiratorGuiPhx.Helpers.Rating
   alias MagiratorGuiPhxWeb.Helpers.Helper
 
   def index(conn, _params) do
@@ -10,6 +8,10 @@ defmodule MagiratorGuiPhxWeb.TierController do
     all_results = collect_all_results(all_decks)
     calculated_tiers = Helper.clock([all_results, all_decks], &build_tiers/2, "Tiers")
 
+    result_count = Enum.count(all_results)
+    calculated_tiers_1 = Helper.clock([Enum.take_random(all_results, result_count), all_decks], &build_tiers/2, "Tiers")
+    calculated_tiers_2 = Helper.clock([Enum.take_random(all_results, result_count), all_decks], &build_tiers/2, "Tiers")
+    calculated_tiers_3 = Helper.clock([Enum.take_random(all_results, result_count), all_decks], &build_tiers/2, "Tiers")
 
     actual_tiers = 
     all_decks
@@ -19,6 +21,9 @@ defmodule MagiratorGuiPhxWeb.TierController do
     render conn, "show.html", [
       actual_tiers: actual_tiers, 
       calculated_tiers: calculated_tiers,
+      calculated_tiers_1: calculated_tiers_1,
+      calculated_tiers_2: calculated_tiers_2,
+      calculated_tiers_3: calculated_tiers_3,
       ]
   end
 
