@@ -1,6 +1,6 @@
 <div class='content'>
   <div>
-    <%= render(MagiratorGuiPhxWeb.StatisticsView, "colors.html", colors_count: @colors_used, label: "Color occurances") %>
+    <%= render(MagiratorGuiPhxWeb.StatisticsView, "color_occurences.html", colors_count: @colors_used, label: "Color occurances") %>
   </div>
 </div>
 <div class='menu'>
