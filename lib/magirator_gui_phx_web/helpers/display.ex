@@ -45,4 +45,5 @@ defmodule MagiratorGuiPhx.Helpers.DisplayHelper do
   def color(value) when value == "Green", do: "green"
   def color(value) when value == "Blue", do: "blue"
   def color(value) when value == "Colorless", do: "colorless"
+  def color(_value), do: "unknown"
 end

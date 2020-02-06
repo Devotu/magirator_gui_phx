@@ -245,6 +245,15 @@ p.facts {
   margin-bottom: -20px;
 }
 
+.list-title.sub {
+  text-align: left;
+  font-size: 1em;
+  font-weight: normal;
+  margin-top: 22px;
+  margin-left: 5px;
+  margin-bottom: -22px;
+}
+
 .name {
   font-size: 1em;
   font-weight: bold;
@@ -314,6 +323,6 @@ p.facts {
   background-color: lightblue;
 }
 
-. {
+.colorless{
   background-color: lightgrey;
 }

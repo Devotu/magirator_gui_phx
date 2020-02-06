@@ -1,0 +1,55 @@
+<h3 class="list-title">Color combination</h3>
+
+<h4 class="list-title sub">Mono</h4>
+<div class='list'>
+  <%= for c <- @color_combinations.monos do %>
+    <div class="list-item <%=DisplayHelper.color(c.first)%>">
+      <p class="fact"><%= c.count %></p>
+    </div>
+  <% end %>
+</div>
+
+<h4 class="list-title sub">Dual</h4>
+<div class='list'>
+  <%= for c <- @color_combinations.duals do %>
+    <div class="list-item <%=DisplayHelper.color(c.first)%>">
+      <p class="fact"><%= c.count %></p>
+    </div>
+  <% end %>
+</div>
+
+<h4 class="list-title sub">Triplets</h4>
+<div class='list'>
+  <%= for c <- @color_combinations.triplets do %>
+    <div class="list-item <%=DisplayHelper.color(c.first)%>">
+      <p class="fact"><%= c.count %></p>
+    </div>
+  <% end %>
+</div>
+
+<h4 class="list-title sub">Quads</h4>
+<div class='list'>
+  <%= for c <- @color_combinations.quads do %>
+    <div class="list-item <%=DisplayHelper.color(c.first)%>">
+      <p class="fact"><%= c.count %></p>
+    </div>
+  <% end %>
+</div>
+
+<h4 class="list-title sub">All</h4>
+<div class='list'>
+  <%= for c <- @color_combinations.pentas do %>
+    <div class="list-item <%=DisplayHelper.color(c.first)%>">
+      <p class="fact"><%= c.count %></p>
+    </div>
+  <% end %>
+</div>
+
+<h4 class="list-title sub">Other</h4>
+<div class='list'>
+  <%= for c <- @color_combinations.others do %>
+    <div class="list-item <%=DisplayHelper.color(c.first)%>">
+      <p class="fact"><%= c.count %></p>
+    </div>
+  <% end %>
+</div>
