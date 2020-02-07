@@ -47,6 +47,40 @@ body {
   padding: 5px;
 }
 
+.list-item.split {
+  width: 100px;
+  height: 60px;
+  padding: 0;
+}
+
+.list-item.half {
+  border: none;
+  width: 100px;
+  height: 30px;
+  padding: 0;
+}
+
+.list-item.third {
+  border: none;
+  width: 100px;
+  height: 20px;
+  padding: 0;
+}
+
+.list-item.quarter {
+  border: none;
+  width: 100px;
+  height: 15px;
+  padding: 0;
+}
+
+.list-item.fifth {
+  border: none;
+  width: 100px;
+  height: 12px;
+  padding: 0;
+}
+
 .page-title {
   height: 50%;
   margin: auto;
@@ -192,8 +226,12 @@ thead {
   text-align: start;
 }
 
-p.facts {
+p.fact {
   font-weight: bold;
+}
+
+p.fact.absolute {
+  position: absolute;
 }
 
 

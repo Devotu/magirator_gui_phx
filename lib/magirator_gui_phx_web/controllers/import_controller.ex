@@ -17,9 +17,8 @@ defmodule MagiratorGuiPhxWeb.ImportController do
 
   def import(conn, %{"import_data" => %{"player_id" => player_id, "data" => data}}) do
 
-    parsed_data = Poison.decode(~s(#{data}))
-
-    IO.inspect(parsed_data)
+    purged_data = clean_json_input(data)
+    parsed_data = Poison.decode(~s(#{purged_data}))
 
     case parsed_data do
       {:error, msg} ->
@@ -50,5 +49,11 @@ defmodule MagiratorGuiPhxWeb.ImportController do
   defp display_error(conn, msg) do
     IO.inspect("error #{Kernel.inspect(msg)}")
     redirect(conn, to: import_path(conn, :new, error: "invalid json"))
+  end
+
+
+  defp clean_json_input(input) do
+    input
+    |> String.replace("'", ~s("))
   end
 end

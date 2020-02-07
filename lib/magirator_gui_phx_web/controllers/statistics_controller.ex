@@ -5,9 +5,19 @@ defmodule MagiratorGuiPhxWeb.StatisticsController do
 
     {:ok, all_decks} = MagiratorStore.list_decks()
 
+    colors_used = 
+    all_decks
+    |> count_colors()
+    |> sort_by_count()
+
+    color_combinations = 
+    all_decks
+    |> count_color_combinations()
+    |> order_color_combinations()
+
     render conn, "show.html", [
-      colors_used: count_colors(all_decks), 
-      color_combinations: count_color_combinations(all_decks)
+      colors_used: colors_used, 
+      color_combinations: color_combinations
       ]
   end
 
@@ -23,9 +33,22 @@ defmodule MagiratorGuiPhxWeb.StatisticsController do
     decks
     |> MagiratorCalculator.count_color_combinations()
     |> Enum.map(fn(%{count: count, colors: colors})-> format_color_info(colors, count) end)
-    |> IO.inspect()
     |> Enum.reduce(%{monos: [], duals: [], triplets: [], quads: [], pentas: [], others: []}, fn(combination, m)-> categorize_combination(combination, m) end)
-    |> IO.inspect()
+  end
+
+  defp order_color_combinations(cc) do
+    %{
+      monos: sort_by_count(cc.monos), 
+      duals: sort_by_count(cc.duals), 
+      triplets: sort_by_count(cc.triplets), 
+      quads: sort_by_count(cc.quads), 
+      pentas: sort_by_count(cc.pentas), 
+      others: sort_by_count(cc.others)
+    }
+  end
+
+  defp sort_by_count(list_with_count) do
+    Enum.sort(list_with_count, &(&1.count > &2.count))
   end
 
 

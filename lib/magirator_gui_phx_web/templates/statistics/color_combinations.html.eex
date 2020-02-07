@@ -12,8 +12,10 @@
 <h4 class="list-title sub">Dual</h4>
 <div class='list'>
   <%= for c <- @color_combinations.duals do %>
-    <div class="list-item <%=DisplayHelper.color(c.first)%>">
-      <p class="fact"><%= c.count %></p>
+    <div class="list-item split">
+      <p class="fact absolute"><%= c.count %></p>
+      <div class="list-item half <%=DisplayHelper.color(c.first)%>"></div>
+      <div class="list-item half <%=DisplayHelper.color(c.second)%>"></div>
     </div>
   <% end %>
 </div>
@@ -21,8 +23,11 @@
 <h4 class="list-title sub">Triplets</h4>
 <div class='list'>
   <%= for c <- @color_combinations.triplets do %>
-    <div class="list-item <%=DisplayHelper.color(c.first)%>">
-      <p class="fact"><%= c.count %></p>
+    <div class="list-item split">
+      <p class="fact absolute"><%= c.count %></p>
+      <div class="list-item third <%=DisplayHelper.color(c.first)%>"></div>
+      <div class="list-item third <%=DisplayHelper.color(c.second)%>"></div>
+      <div class="list-item third <%=DisplayHelper.color(c.third)%>"></div>
     </div>
   <% end %>
 </div>
@@ -30,8 +35,12 @@
 <h4 class="list-title sub">Quads</h4>
 <div class='list'>
   <%= for c <- @color_combinations.quads do %>
-    <div class="list-item <%=DisplayHelper.color(c.first)%>">
-      <p class="fact"><%= c.count %></p>
+    <div class="list-item split">
+      <p class="fact absolute"><%= c.count %></p>
+      <div class="list-item quarter <%=DisplayHelper.color(c.first)%>"></div>
+      <div class="list-item quarter <%=DisplayHelper.color(c.second)%>"></div>
+      <div class="list-item quarter <%=DisplayHelper.color(c.third)%>"></div>
+      <div class="list-item quarter <%=DisplayHelper.color(c.fourth)%>"></div>
     </div>
   <% end %>
 </div>
@@ -39,8 +48,13 @@
 <h4 class="list-title sub">All</h4>
 <div class='list'>
   <%= for c <- @color_combinations.pentas do %>
-    <div class="list-item <%=DisplayHelper.color(c.first)%>">
-      <p class="fact"><%= c.count %></p>
+    <div class="list-item split">
+      <p class="fact absolute"><%= c.count %></p>
+      <div class="list-item quarter <%=DisplayHelper.color(c.first)%>"></div>
+      <div class="list-item fifth <%=DisplayHelper.color(c.second)%>"></div>
+      <div class="list-item fifth <%=DisplayHelper.color(c.third)%>"></div>
+      <div class="list-item fifth <%=DisplayHelper.color(c.fourth)%>"></div>
+      <div class="list-item fifth <%=DisplayHelper.color(c.fifth)%>"></div>
     </div>
   <% end %>
 </div>
